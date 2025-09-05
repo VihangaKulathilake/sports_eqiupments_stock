@@ -10,7 +10,7 @@ if (isset($_SESSION["profileImg"]) && !empty($_SESSION["profileImg"])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="adminHeader.css">
+  <link rel="stylesheet" href="style.css">
   <?php if(isset($cssFile)) { ?>
       <link rel="stylesheet" href="<?php echo $cssFile; ?>">
   <?php } ?>
@@ -41,7 +41,7 @@ if (isset($_SESSION["profileImg"]) && !empty($_SESSION["profileImg"])) {
     <nav class="sidebar" aria-label="Main Navigation">
       <img src="imgs/E2-removebg-preview-2.png" alt="sidebarLogo" class="sidebarLogo">
       <ul class="navlinks">
-        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="adminDashboard.php">Dashboard</a></li>
         <li><a href="products.php">Products</a></li>
         <li><a href="categories.php">Categories</a></li>
         <li><a href="stock.php">Stock</a></li>
