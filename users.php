@@ -1,8 +1,8 @@
 <?php
 $pageTitle = "Admin Users";
-$cssFile = "users.css";
+$cssFile = "css/users.css";
 include 'includes/db.php';
-include 'header.php';
+include 'adminHeader.php';
 ?>
 
 <div class="users-container">
