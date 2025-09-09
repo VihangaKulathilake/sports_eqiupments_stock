@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <?php if(isset($cssFile)) { ?>
+      <link rel="stylesheet" href="<?php echo $cssFile; ?>">
+  <?php } ?>
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <title>SPORTIVO</title>
+</head>
+<body>
+<?php
+session_start();
+$profileImg = "imgs/user.png";
+if (isset($_SESSION["profileImg"]) && !empty($_SESSION["profileImg"])) {
+    $profileImg = "uploads/" . $_SESSION["profileImg"];
+}
+?>
+<div class="page-container">
+  <!-- Header -->
+  <div class="headerbar">
+    <div class="headerbartop">
+      <!-- Menu Toggle -->
+      <div class="menuToggle" aria-label="Toggle Menu">
+        <img src="imgs\png-transparent-hamburger-menu-more-navigation-basic-ui-jumpicon-glyph-icon-removebg-preview.png" alt="Menu Icon" class="icon">
+      </div>
+      <img src="imgs/E11.png" alt="headerLogo" class="headerLogo">
+
+      <a href="myProfile.php" class="profileImgLink">
+        <img src="imgs\Profile-PNG-Picture.webp" alt="profilePhoto" class="profilePhoto">
+      </a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="searchbarcontainer">
+      <form class="searchbarhome" action="searchResults.php" method="get">
+        <input type="search" class="searchbar" name="query" placeholder="Search products, users,..." style="font-size:18px; padding-left:10px">
+        <button type="submit" class="searchbtn">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" aria-label="Main Navigation">
+    <img src="imgs/E2-removebg-preview-2.png" alt="sidebarLogo" class="sidebarLogo">
+    <ul class="navlinks">
+      <li><a href="adminDashboard.php">Dashboard</a></li>
+      <li><a href="products.php">Products</a></li>
+      <li><a href="categories.php">Categories</a></li>
+      <li><a href="stock.php">Stock</a></li>
+      <li><a href="orders.php">Orders</a></li>
+      <li><a href="users.php">Users</a></li>
+      <li><a href="suppliers.php">Suppliers</a></li>
+    </ul>
+    <ul class="navbottom">
+      <li><a href="includes/logout.inc.php">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+  <!-- Home -->
+<section class="home" id="home">
+  <div class="overlay"></div>
+  <div class="home-content">
+    <h1 class="brand-name">SPORTIVO</h1>
+    <p class="tagline">Your one-stop shop for premium sports goods.</p>
+    <a href="#products" class="btn-primary">Shop Now</a>
+  </div>
+</section>
+</div>
+
+<!--JavaScript for Sidebar Toggle -->
+<script>
+  const toggleBtn = document.querySelector(".menuToggle");
+  const sidebar = document.querySelector(".sidebar");
+  const overlay = document.querySelector(".overlay");
+
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+    overlay.classList.toggle("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+</script>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img 
+      src="imgs/epic-sport-layout-website-creative-web-design-sport-retails-items-shop-figma-concept-ideas_655090-1666885.jpg" 
+      alt="About SPORTIVO"
+    >
+  </div>
+
+  <div class="about-content">
+    <h2><span>About</span> Our History</h2>
+    
+    <p>
+      Since our founding, <strong>SPORTIVO</strong> has been dedicated to providing
+      premium sports equipment for athletes of all levels. Our passion for
+      excellence drives us to deliver quality, durability, and innovation in every
+      product.
+    </p>
+
+    <p>
+      From cricket bats to boxing gloves, we bring the best of global sports brands
+      to your doorstep. Trusted by thousands of athletes, SPORTIVO is your one-stop
+      destination for sports gear.
+    </p>
+
+    <p>
+      At SPORTIVO, we believe that the right equipment can transform performance.
+      That’s why we carefully source products from world-renowned brands and ensure
+      that each item meets international standards of quality and safety. Whether
+      you are a beginner, a professional athlete, or a fitness enthusiast, our wide
+      range of collections is designed to suit every need.
+    </p>
+
+    <p>
+      Our mission goes beyond selling products we aim to inspire a sporting
+      lifestyle. With continuous innovation, expert recommendations, and a
+      commitment to customer satisfaction, SPORTIVO is more than a store, it’s a
+      trusted partner in every athlete’s journey.
+    </p>
+
+    <p>
+      Join the SPORTIVO family today and experience sports shopping like never
+      before where passion meets performance.
+    </p>
+
+    <a href="#" class="btn-primary">Learn More</a>
+  </div>
+</section>
+
+
+<!-- Products Section -->
+<section class="products" id="products">
+  <div class="heading">
+    <h2>Our Popular Products</h2>
+    <p>Discover our top-selling items loved by athletes worldwide</p>
+  </div>
+
+  <div class="product-grid">
+    <!-- Product Card -->
+    <div class="product-card">
+      <img src="imgs/th (1).jpeg" alt="Leather Bat">
+      <h3>Leather Bat</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 55,000</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/th (2).jpeg" alt="Leather Ball">
+      <h3>Leather Ball</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 2,500</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/th (12).jpeg" alt="Boxing Gloves">
+      <h3>Boxing Gloves</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 6,000</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/th (4).jpeg" alt="Volleyball Net">
+      <h3>Volleyball Net</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 7,500</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/th (14).jpeg" alt="Football Shoes">
+      <h3>Football Shoes</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 7,900</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/OIP (1).jpg" alt="Goggles">
+      <h3>Goggles</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 3,400</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/OIP (2).jpg" alt="Tennis Ball">
+      <h3>Tennis Ball</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 1,200</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/OIP (4).jpg" alt="Wicket Keeping Gloves">
+      <h3>Wicket Keeping Gloves</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 5,000</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/OIP.jpg" alt="Hockey Ball">
+      <h3>Hockey Ball</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 2,400</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <img src="imgs/th (5).jpeg" alt="Rugby Ball">
+      <h3>Rugby Ball</h3>
+      <div class="card-footer">
+        <span class="price">Rs. 9,500</span>
+        <a href="#" class="btn-primary">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Customers -->
+<section class="customers" id="customers">
+  <div class="heading">
+    <h2>Our Happy Customers</h2>
+    <p>Hear what athletes say about SPORTIVO</p>
+  </div>
+
+  <div class="customers-grid">
+    <!-- Customer 1 -->
+    <div class="customer-card">
+      <div class="stars">
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star-half"></i>
+      </div>
+      <p>
+        “The quality of SPORTIVO’s bats is unmatched! Durable, lightweight, and
+        perfect for my game.”
+      </p>
+      <div class="customer-info">
+        <img src="imgs/rev1.jpg" alt="Customer Review 1">
+        <h3>Chamath Kavinda</h3>
+      </div>
+    </div>
+
+    <!-- Customer 2 -->
+    <div class="customer-card">
+      <div class="stars">
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star-half"></i>
+      </div>
+      <p>
+        “Best sports store in town. Affordable prices and amazing customer
+        support!”
+      </p>
+      <div class="customer-info">
+        <img src="imgs/rev2.jpg" alt="Customer Review 2">
+        <h3>Kasun Sampath</h3>
+      </div>
+    </div>
+
+    <!-- Customer 3 -->
+    <div class="customer-card">
+      <div class="stars">
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star"></i>
+        <i class="bx bxs-star-half"></i>
+      </div>
+      <p>
+        “I love my new football shoes! Stylish, comfortable, and great
+        performance on the field.”
+      </p>
+      <div class="customer-info">
+        <img src="imgs/rev3.jpg" alt="Customer Review 3">
+        <h3>Kaveesha Gamage</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- About -->
+    <div class="footer-box">
+      <h3>About Sportivo</h3>
+      <p>
+        Sportivo is your one-stop destination for premium sports equipment and
+        accessories. We bring quality, performance, and style together to help
+        athletes and enthusiasts achieve their best every day.
+      </p>
+      <div class="social">
+        <a href="#"><i class="bx bxl-facebook-circle"></i></a>
+        <a href="#"><i class="bx bxl-twitter"></i></a>
+        <a href="#"><i class="bx bxl-instagram-alt"></i></a>
+        <a href="#"><i class="bx bxl-tiktok"></i></a>
+      </div>
+    </div>
+
+    <!-- Products -->
+    <div class="footer-box">
+      <h3>Products</h3>
+      <ul>
+        <li><a href="#">All Sports Equipment</a></li>
+        <li><a href="#">Team & Individual Gear</a></li>
+        <li><a href="#">Fitness Accessories</a></li>
+        <li><a href="#">Training & Coaching Tools</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Best Sellers</a></li>
+        <li><a href="#">Sale Items</a></li>
+      </ul>
+    </div>
+
+    <!-- Support -->
+    <div class="footer-box">
+      <h3>Support & Terms</h3>
+      <ul>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Return & Refund Policy</a></li>
+        <li><a href="#">Shipping & Delivery Policy</a></li>
+        <li><a href="#">Help & Support</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Warranty Information</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-box">
+      <h3>Contact</h3>
+      <div class="contact">
+        <span><i class="bx bx-map"></i>No 247, Kandy Road, Colombo 07</span>
+        <span><i class="bx bxs-phone-call"></i>077 6777202</span>
+        <span><i class="bx bxs-envelope"></i>sportivosports@gmail.com</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <p>© 2025 Sportivo. All Rights Reserved.</p>
+  </div>
+</footer>
