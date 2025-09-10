@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/helpers.php';
+
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
 $profileImg = "imgs/user.png";
@@ -19,34 +20,71 @@ $pageTitle = "Shopping Cart";
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
   <title><?php echo $pageTitle; ?></title>
+  <style>
+    /* Blue theme adjustments */
+    body {
+      background-color: #f8faff;
+    }
+    .btn-primary, .btn-danger {
+      background-color: #007bff !important;
+      border: none !important;
+    }
+    .btn-primary:hover, .btn-danger:hover {
+      background-color: #0056b3 !important;
+    }
+    .headerbar, .footer, .sidebar {
+      background-color: #004080;
+      color: white;
+    }
+    .headerLogo, .sidebarLogo {
+      filter: brightness(0) invert(1); /* make logos visible on dark bg */
+    }
+    .footer a, .sidebar a {
+      color: #cce0ff;
+      text-decoration: none;
+    }
+    .footer a:hover, .sidebar a:hover {
+      color: #ffffff;
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .list-group-item {
+      background: #f9fbff;
+    }
+    .fw-bold.fs-5 span {
+      color: #004080;
+    }
+  </style>
 </head>
 <body>
 <div class="page-container">
 
   <!-- HEADER -->
   <div class="headerbar">
-    <div class="headerbartop">
+    <div class="headerbartop d-flex align-items-center justify-content-between px-3 py-2">
       <div class="menuToggle" aria-label="Toggle Menu">
-        <img src="imgs/png-transparent-hamburger-menu-more-navigation-basic-ui-jumpicon-glyph-icon-removebg-preview.png" alt="Menu Icon" class="icon">
+        <img src="imgs/png-transparent-hamburger-menu-more-navigation-basic-ui-jumpicon-glyph-icon-removebg-preview.png" alt="Menu Icon" class="icon" style="width:30px; cursor:pointer;">
       </div>
-      <img src="imgs/E11.png" alt="headerLogo" class="headerLogo">
+      <img src="imgs/E11.png" alt="headerLogo" class="headerLogo" style="height:40px;">
       <a href="myProfile.php" class="profileImgLink">
-        <img src="<?php echo $profileImg; ?>" alt="profilePhoto" class="profilePhoto">
+        <img src="<?php echo $profileImg; ?>" alt="profilePhoto" class="profilePhoto rounded-circle" style="width:40px; height:40px;">
       </a>
     </div>
 
-    <div class="searchbarcontainer">
-      <form class="searchbarhome" action="searchResults.php" method="get">
-        <input type="search" class="searchbar" name="query" placeholder="Search products, users,..." style="font-size:18px; padding-left:10px">
-        <button type="submit" class="searchbtn">Search</button>
+    <div class="searchbarcontainer px-3 py-2">
+      <form class="searchbarhome d-flex" action="searchResults.php" method="get">
+        <input type="search" class="form-control" name="query" placeholder="Search products, users,..." style="font-size:16px;">
+        <button type="submit" class="btn btn-primary ms-2">Search</button>
       </form>
     </div>
   </div>
 
   <!-- SIDEBAR -->
-  <nav class="sidebar" aria-label="Main Navigation">
-    <img src="imgs/E2-removebg-preview-2.png" alt="sidebarLogo" class="sidebarLogo">
-    <ul class="navlinks">
+  <nav class="sidebar p-3" aria-label="Main Navigation">
+    <img src="imgs/E2-removebg-preview-2.png" alt="sidebarLogo" class="sidebarLogo mb-3" style="height:50px;">
+    <ul class="navlinks list-unstyled">
       <li><a href="adminDashboard.php">Dashboard</a></li>
       <li><a href="products.php">Products</a></li>
       <li><a href="categories.php">Categories</a></li>
@@ -55,7 +93,7 @@ $pageTitle = "Shopping Cart";
       <li><a href="users.php">Users</a></li>
       <li><a href="suppliers.php">Suppliers</a></li>
     </ul>
-    <ul class="navbottom">
+    <ul class="navbottom list-unstyled mt-3">
       <li><a href="includes/logout.inc.php">Logout</a></li>
     </ul>
   </nav>
@@ -64,12 +102,12 @@ $pageTitle = "Shopping Cart";
   <!-- MAIN CONTENT -->
   <main class="content">
     <div class="container py-4">
-      <h1 class="mb-4">Shopping Cart</h1>
+      <h1 class="mb-4 text-primary">Shopping Cart</h1>
       <div class="row">
         <!-- Cart Items -->
         <div class="col-md-8">
           <table class="table align-middle">
-            <thead class="table-light">
+            <thead class="table-primary">
               <tr>
                 <th>Item</th>
                 <th>Price</th>
@@ -79,37 +117,43 @@ $pageTitle = "Shopping Cart";
               </tr>
             </thead>
             <tbody id="cart-items">
-  <tr>
-    <td>
-      <div class="d-flex align-items-center">
-        <img src="assets/sample-bat.jpg" alt="Product" width="60" class="me-3">
-        <span>SS Toss Coin</span>
-      </div>
-    </td>
-    <td class="item-price" data-price="25000">LKR 25,000.00</td>
-    <td><input type="number" class="form-control form-control-sm qty-input" value="1" min="1" style="width:80px;"></td>
-    <td class="line-total">LKR 25,000.00</td>
-    <td><button class="btn btn-sm btn-danger remove-item">✕</button></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="d-flex align-items-center">
-        <img src="assets/sample-gloves.jpg" alt="Product" width="60" class="me-3">
-        <span>Cricket Gloves</span>
-      </div>
-    </td>
-    <td class="item-price" data-price="8000">LKR 8,000.00</td>
-    <td><input type="number" class="form-control form-control-sm qty-input" value="2" min="1" style="width:80px;"></td>
-    <td class="line-total">LKR 16,000.00</td>
-    <td><button class="btn btn-sm btn-danger remove-item">✕</button></td>
-  </tr>
-</tbody>
-
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img src="assets/sample-bat.jpg" alt="Product" width="60" class="me-3 rounded">
+                    <span>SS Toss Coin</span>
+                  </div>
+                </td>
+                <td class="item-price" data-price="25000">LKR 25,000.00</td>
+                <td><input type="number" class="form-control form-control-sm qty-input" value="1" min="1" style="width:80px;"></td>
+                <td class="line-total">LKR 25,000.00</td>
+                <td><button class="btn btn-sm btn-primary remove-item">✕</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <img src="assets/sample-gloves.jpg" alt="Product" width="60" class="me-3 rounded">
+                    <span>Cricket Gloves</span>
+                  </div>
+                </td>
+                <td class="item-price" data-price="8000">LKR 8,000.00</td>
+                <td><input type="number" class="form-control form-control-sm qty-input" value="2" min="1" style="width:80px;"></td>
+                <td class="line-total">LKR 16,000.00</td>
+                <td><button class="btn btn-sm btn-primary remove-item">✕</button></td>
+              </tr>
+            </tbody>
           </table>
 
           <div class="d-flex justify-content-between mt-3">
-            <a href="products.php" class="btn btn-outline-secondary">Continue Shopping</a>
-            <a href="checkout.php" class="btn btn-danger">Proceed to Checkout</a>
+            <a href="products.php" class="btn btn-outline-primary">Continue Shopping</a>
+            <form id="checkoutForm" action="checkout.php" method="post">
+              <input type="hidden" name="subtotal_ex" id="subtotal_ex_input">
+              <input type="hidden" name="subtotal_in" id="subtotal_in_input">
+              <input type="hidden" name="shipping" id="shipping_input">
+              <input type="hidden" name="tax" id="tax_input">
+              <input type="hidden" name="order_total" id="order_total_input">
+              <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+            </form>
           </div>
         </div>
 
@@ -117,13 +161,13 @@ $pageTitle = "Shopping Cart";
         <div class="col-md-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="mb-3">Apply Coupon Code</h5>
+              <h5 class="mb-3 text-primary">Apply Coupon Code</h5>
               <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Enter coupon code">
-                <button class="btn btn-danger">Apply</button>
+                <button class="btn btn-primary">Apply</button>
               </div>
 
-              <h5 class="mb-3">Summary</h5>
+              <h5 class="mb-3 text-primary">Summary</h5>
               <ul class="list-group list-group-flush mb-3">
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Subtotal (Excl. Tax)</span><span id="subtotal-ex">LKR 25,000.00</span>
@@ -149,56 +193,58 @@ $pageTitle = "Shopping Cart";
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer_box">
-        <h3>About Sportivo</h3>
-        <p>Sportivo is your one-stop destination for premium sports equipment and accessories. We bring quality, performance, and style together to help athletes and enthusiasts achieve their best every day.</p>
-        <div class="social">
-            <a href="#"><i class='bx bxl-facebook-circle'></i></a>
-            <a href="#"><i class='bx bxl-twitter'></i></a>
-            <a href="#"><i class='bx bxl-instagram-alt'></i></a>
-            <a href="#"><i class='bx bxl-tiktok'></i></a>
-        </div>
-    </div>
+  <footer class="footer p-4 text-white">
+    <div class="row">
+      <div class="col-md-3 footer_box">
+          <h3>About Sportivo</h3>
+          <p>Sportivo is your one-stop destination for premium sports equipment and accessories. We bring quality, performance, and style together to help athletes and enthusiasts achieve their best every day.</p>
+          <div class="social">
+              <a href="#"><i class='bx bxl-facebook-circle'></i></a>
+              <a href="#"><i class='bx bxl-twitter'></i></a>
+              <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+              <a href="#"><i class='bx bxl-tiktok'></i></a>
+          </div>
+      </div>
 
-    <div class="footer_box">
-        <h3>Products</h3>
-        <ul>
-            <li><a href="#">All Sports Equipment</a></li>
-            <li><a href="#">Team & Individual Gear</a></li>
-            <li><a href="#">Fitness Accessories</a></li>
-            <li><a href="#">Training & Coaching Tools</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Best Sellers</a></li>
-            <li><a href="#">Sale Items</a></li>
-        </ul>
-    </div>
+      <div class="col-md-3 footer_box">
+          <h3>Products</h3>
+          <ul class="list-unstyled">
+              <li><a href="#">All Sports Equipment</a></li>
+              <li><a href="#">Team & Individual Gear</a></li>
+              <li><a href="#">Fitness Accessories</a></li>
+              <li><a href="#">Training & Coaching Tools</a></li>
+              <li><a href="#">New Arrivals</a></li>
+              <li><a href="#">Best Sellers</a></li>
+              <li><a href="#">Sale Items</a></li>
+          </ul>
+      </div>
 
-    <div class="footer_box">
-        <h3>Support / Terms</h3>
-        <ul>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Return & Refund Policy</a></li>
-            <li><a href="#">Shipping & Delivery Policy</a></li>
-            <li><a href="#">Help & Support</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Warranty Information</a></li>
-        </ul>
-    </div>
+      <div class="col-md-3 footer_box">
+          <h3>Support / Terms</h3>
+          <ul class="list-unstyled">
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Return & Refund Policy</a></li>
+              <li><a href="#">Shipping & Delivery Policy</a></li>
+              <li><a href="#">Help & Support</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Warranty Information</a></li>
+          </ul>
+      </div>
 
-    <div class="footer_box">
-        <h3>Contact</h3>
-        <div class="Contact">
-            <span><i class='bx bx-map'></i>Mahawaththa, Andaluwa, Gomila, Mawarala</span>
-            <span><i class='bx bxs-phone-call'></i>0775227202</span>
-            <span><i class='bx bxs-envelope'></i>sportivosports@gmail.com</span>
-        </div>
+      <div class="col-md-3 footer_box">
+          <h3>Contact</h3>
+          <div class="Contact">
+              <span><i class='bx bx-map'></i> Mahawaththa, Andaluwa, Gomila, Mawarala</span><br>
+              <span><i class='bx bxs-phone-call'></i> 0775227202</span><br>
+              <span><i class='bx bxs-envelope'></i> sportivosports@gmail.com</span>
+          </div>
+      </div>
     </div>
   </footer>
 </div>
 
-<div class="footer-bottom">
+<div class="footer-bottom text-center py-2 bg-dark text-white">
   <p>© 2025 Sportivo. All Rights Reserved.</p>
 </div>
 
@@ -213,11 +259,11 @@ toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
   overlay.classList.toggle("active");
 });
-
 overlay.addEventListener("click", () => {
   sidebar.classList.remove("active");
   overlay.classList.remove("active");
 });
+
 // Auto update subtotal & summary
 document.addEventListener("input", e => {
   if (e.target.classList.contains("qty-input")) {
@@ -256,13 +302,20 @@ function updateTotals() {
   document.getElementById('shipping').innerText = "LKR " + shipping.toLocaleString();
   document.getElementById('tax').innerText = "LKR " + tax.toLocaleString();
   document.getElementById('order-total').innerText = "LKR " + orderTotal.toLocaleString();
+
+  // update hidden inputs for checkout
+  document.getElementById("subtotal_ex_input").value = subtotalEx;
+  document.getElementById("subtotal_in_input").value = subtotalIncl;
+  document.getElementById("shipping_input").value = shipping;
+  document.getElementById("tax_input").value = tax;
+  document.getElementById("order_total_input").value = orderTotal;
 }
 
 // run once on page load
 updateTotals();
-
 </script>
 </body>
 </html>
+
 
 
