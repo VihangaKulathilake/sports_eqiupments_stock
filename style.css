@@ -1,0 +1,152 @@
+/* Reset + Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f5f6fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  background: #ffffff;
+  padding: 0.8rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.navbar img {
+  height: 40px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #2d3436;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar ul li a:hover {
+  color: #0984e3;
+}
+
+/* Form / Box container */
+.form-container {
+  margin-top: 100px; /* push below navbar */
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  width: 380px;
+  text-align: center;
+}
+
+.form-container img {
+  width: 120px;
+  margin-bottom: 1rem;
+}
+
+.form-container h2 {
+  margin-bottom: 1rem;
+  color: #2d3436;
+  font-weight: 600;
+}
+
+.form-container p {
+  margin: 0.5rem 0 1rem;
+  color: #636e72;
+  font-size: 14px;
+}
+
+/* Inputs & Select */
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 12px;
+  margin: 0.6rem 0;
+  border: 1px solid #dfe6e9;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+  border: 1px solid #0984e3;
+}
+
+/* Buttons */
+.form-container button,
+.form-container .btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.form-container button:hover,
+.form-container .btn:hover {
+  opacity: 0.9;
+}
+
+/* Error messages */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+/* Dashboard */
+.dashboard {
+  margin-top: 100px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  width: 420px;
+  text-align: center;
+}
+
+.dashboard h2 {
+  color: #2d3436;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard p {
+  color: #636e72;
+  margin-bottom: 1rem;
+}
