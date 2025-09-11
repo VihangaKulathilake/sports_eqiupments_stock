@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/auth.css"> <title>Login</title>
 </head>
 <body class="auth-container">
-    <form class="auth-form" action="login.inc.php" method="post">
+    <form class="auth-form" action="includes/login.inc.php" method="post">
         <div class="logo-container">
             <img src="imgs/E11.png" alt="logo">
         </div>
