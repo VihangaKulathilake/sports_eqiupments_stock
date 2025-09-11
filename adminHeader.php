@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'includes/db.php';
 $profileImg = "imgs/user.png";
 if (isset($_SESSION["profileImg"]) && !empty($_SESSION["profileImg"])) {
