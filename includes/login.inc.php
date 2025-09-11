@@ -13,5 +13,5 @@ if(isset($_POST["submit"])){
     userLogin($connect,$username,$password);
 
 }else{
-    header('Location:../.php');
+    header('Location:../login.php');
 }
