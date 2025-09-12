@@ -1,0 +1,131 @@
+/* General container for the orders page */
+body {
+    background-color: #f0f2f5;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.orders-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.orders-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Orders List container */
+.orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Order Card styles */
+.order-card {
+    background-color: rgba(215, 228, 241, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    padding: 25px;
+}
+
+/* Order summary section */
+.order-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    text-align: center;
+}
+
+.summary-item strong {
+    color: #555;
+    font-size: 12px;
+}
+
+/* Status badge */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.status-badge.status-shipped { background-color: #4CAF50; }
+.status-badge.status-pending { background-color: #ff9800; }
+.status-badge.status-delivered { background-color: #2196F3; }
+.status-badge.status-canceled { background-color: #f44336; }
+
+/* Order items list */
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual order item */
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.product-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.product-quantity,
+.product-price {
+    font-size: 14px;
+    color: #777;
+}
+
+/* No orders message */
+.no-orders-message {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .order-card {
+        padding: 15px;
+    }
+    .order-summary {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .summary-item {
+        flex: 1 1 45%;
+    }
+}
