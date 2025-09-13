@@ -1,0 +1,105 @@
+/* Main container for thank you page */
+.thankyou-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px; /* Smooth rounded corners */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Soft shadow for depth */
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page title */
+.thankyou-container h2 {
+    color: #4CAF50; /* Green color for success */
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+/* Subtext/paragraph styling */
+.thankyou-container p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Order summary section */
+.order-summary {
+    overflow-x: auto; /* Enables horizontal scroll on small screens */
+    margin-top: 20px;
+}
+
+.order-summary h3 {
+    text-align: left;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Table styles */
+.order-summary table {
+    width: 100%;
+    border-collapse: collapse; /* Removes gaps between cells */
+    font-size: 14px;
+}
+
+.order-summary th, 
+.order-summary td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Table header */
+.order-summary th {
+    background-color: #f5f5f5;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Alternating row colors */
+.order-summary tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Highlight row on hover */
+.order-summary tr:hover {
+    background-color: #f1f9f5;
+    transition: 0.3s;
+}
+
+/* Product image inside table */
+.order-summary img {
+    max-width: 60px;
+    border-radius: 6px;
+}
+
+/* Grand total row styles */
+.order-summary tr:last-child {
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+}
+
+.order-summary tr:last-child td {
+    border-top: 2px solid #388E3C;
+}
+
+/* Button style */
+.btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+/* Button hover effect */
+.btn:hover {
+    background-color: #45a049;
+}
