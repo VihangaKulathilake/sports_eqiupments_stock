@@ -46,10 +46,10 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
             </div>
         </a>
 
-        <a href="makeOrder.php" class="dashboard-card make-order">
+        <a href="insertProduct.php" class="dashboard-card insert-product">
             <div class="card-title">
-                <img src="imgs/bulk-orders.png" alt="Order icon">
-                <h2>Make an Order</h2>
+                <img src="imgs/add.png" alt="Add icon">
+                <h2>Register Product</h2>
             </div>
         </a>
     </div>
@@ -381,8 +381,8 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
                 <div class="pie-chart-stats">
                     <?php
                     //pie chart stats
-                    $maxIndexSup = array_keys($totalsPerSupplier, max($totalsPerSupplier))[0];
-                    $minIndexSup = array_keys($totalsPerSupplier, min($totalsPerSupplier))[0];
+                    $maxIndexSup = !empty($totalsPerSupplier) ? array_keys($totalsPerSupplier, max($totalsPerSupplier))[0] : -1;
+                    $minIndexSup = !empty($totalsPerSupplier) ? array_keys($totalsPerSupplier, min($totalsPerSupplier))[0] : -1;
                     ?>
 
                     <div class="top-supplier">
@@ -424,7 +424,7 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
                     <div class="sup-order-progress-bar">
                         <div class="sup-order-progress-fill" style="width: <?php echo $completedSupPercentage; ?>%;"></div>
                     </div>
-                    <p><strong><?php echo round($completedSupPercentage, 2); ?>%</strong> of Supplier Orders are Completed</p>
+                    <p><strong><?php echo round($completedSupPercentage, 2); ?>%</strong> of Purchases are Completed</p>
                 </div>
             </div>
 
