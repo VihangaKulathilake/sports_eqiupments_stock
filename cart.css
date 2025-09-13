@@ -1,0 +1,153 @@
+/*container*/
+.cart-container {
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.cart-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/*cart table*/
+.cart-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 15px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 600px;
+}
+
+.cart-table th:first-child {
+    border-top-left-radius: 15px;
+}
+
+.cart-table th:last-child {
+    border-top-right-radius: 15px;
+}
+
+.cart-table tr:last-child td:first-child {
+    border-bottom-left-radius: 15px;
+}
+
+.cart-table tr:last-child td:last-child {
+    border-bottom-right-radius: 15px;
+}
+
+.cart-table th {
+    background-color: rgb(89, 143, 243);
+    color: white;
+    border: 1px solid rgb(224, 224, 224);
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgb(224, 224, 224);
+    white-space: nowrap;
+}
+
+/* Product Images */
+.cart-table img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Grand Total */
+.cart-table .grand-total td {
+    font-weight: bold;
+    font-size: 1.3em;
+    border: 1px solid rgb(201, 201, 201);
+    background-color: rgb(62, 62, 62);
+    color: #fff;
+}
+
+/*buttons */
+.cart-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-buy, .btn-clear, .btn-back {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+}
+
+.btn-buy {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-buy:hover {
+    background-color: #218838;
+}
+
+.btn-clear {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-clear:hover {
+    background-color: #c82333;
+}
+
+.btn-back {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+}
+
+/*responsive styles */
+@media (max-width: 768px) {
+    .cart-container {
+        padding: 15px;
+    }
+
+    .cart-table {
+        min-width: 500px;
+    }
+
+    .cart-actions {
+        justify-content: center;
+    }
+
+    .btn-buy, .btn-clear, .btn-back {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    .cart-table img {
+        max-width: 100%;
+        height: auto;
+    }
+}
