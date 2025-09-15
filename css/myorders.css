@@ -1,131 +1,171 @@
-/* General container for the orders page */
-body {
-    background-color: #f0f2f5;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
+/* General container */
 .orders-container {
+    max-width: 90%;
+    margin: 40px auto;
     padding: 20px;
-    max-width: 900px;
-    margin: 20px auto;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .orders-container h1 {
     text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
     color: #333;
-    margin-bottom: 20px;
 }
 
-/* Orders List container */
+/* Order list */
 .orders-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Order Card styles */
+/* Order card */
 .order-card {
-    background-color: rgba(215, 228, 241, 0.6);
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    padding: 25px;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Order summary section */
+.order-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Summary section */
 .order-summary {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
     margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
 }
 
 .summary-item {
     display: flex;
-    flex-direction: column;
-    font-size: 14px;
-    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 180px;
+    font-size: 0.95rem;
+    color: #555;
 }
 
 .summary-item strong {
-    color: #555;
-    font-size: 12px;
+    margin-right: 12px;
+    color: #222;
 }
 
 /* Status badge */
 .status-badge {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    white-space: nowrap;
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+    cursor: default;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(255, 255, 255, 0.185);
+    border: none;
 }
 
-.status-badge.status-shipped { background-color: #4CAF50; }
-.status-badge.status-pending { background-color: #ff9800; }
-.status-badge.status-delivered { background-color: #2196F3; }
-.status-badge.status-canceled { background-color: #f44336; }
+.status-pending {
+    background-color: #f0ad4e;
+}
 
-/* Order items list */
+.status-completed {
+    background-color: #28a745;
+}
+
+/* Order total */
+.order-total {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+/* Order items */
 .order-items {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 10px;
 }
 
-/* Individual order item */
 .order-item {
     display: flex;
     align-items: center;
     gap: 15px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fafafa;
 }
 
+.order-item:hover {
+    background: #f5f5f5;
+}
+
+/* Product image */
 .product-image {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: auto;
+    max-width: 160px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    border: 1px solid #ddd;
 }
 
+/* Product details */
 .product-details {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: #444;
 }
 
 .product-name {
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #222;
 }
 
-.product-quantity,
 .product-price {
-    font-size: 14px;
-    color: #777;
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 /* No orders message */
 .no-orders-message {
     text-align: center;
-    font-style: italic;
+    padding: 30px;
+    font-size: 1.2rem;
     color: #777;
-    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .order-card {
-        padding: 15px;
-    }
+/* Responsive */
+@media (max-width: 768px) {
     .order-summary {
-        flex-wrap: wrap;
-        gap: 10px;
+        flex-direction: column;
     }
-    .summary-item {
-        flex: 1 1 45%;
+
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 120px;
     }
 }
