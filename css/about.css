@@ -1,0 +1,113 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.about-hero {
+  position: relative;
+  background: url("realistic-soccer-or-football-in-net-with-copy-space-free-vector.jpg") no-repeat center/cover;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+.about-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+.about-hero .hero-content {
+  position: relative;
+  z-index: 2;
+}
+.about-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.about-hero h1 span {
+  color: #00aaff;
+}
+.about-hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.about {
+  display: flex;
+  align-items: center;
+  padding: 4rem 10%;
+  gap: 3rem;
+  background: #f9f9f9;
+}
+
+.about-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.mission-vision {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 4rem 10%;
+  background: #fff;
+}
+.card {
+  flex: 1;
+  padding: 2rem;
+  border-radius: 15px;
+  background: #f0f8ff;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-10px);
+}
+.card h3 {
+  font-size: 1.6rem;
+  color: #00aaff;
+  margin-bottom: 1rem;
+}
+.card p {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.cta {
+  text-align: center;
+  padding: 4rem 10%;
+  background: linear-gradient(135deg, #00aaff, #0044cc);
+  color: #fff;
+}
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    text-align: center;
+  }
+  .mission-vision {
+    flex-direction: column;
+  }
+}
