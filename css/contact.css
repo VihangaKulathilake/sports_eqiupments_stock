@@ -1,5 +1,7 @@
 /* General container */
 body {
+     background: url('../imgs copy/343561.jpg') no-repeat center center fixed;
+    background-size: cover;
     background-color: #f0f2f5;
     font-family: sans-serif;
     margin: 0;
@@ -10,24 +12,26 @@ body {
     padding: 20px;
     max-width: 900px;
     margin: 20px auto;
-    background-color: rgba(215, 228, 241, 0.6);
+    background-color: rgba(243, 244, 246, 0.241);
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
+    backdrop-filter: blur(13px); 
+    -webkit-backdrop-filter: blur(13px);
     gap: 30px;
 }
 
 .contact-container h1,
 .contact-container h2 {
     text-align: center;
-    color: #333;
+    color: #070707;
     margin-bottom: 10px;
 }
 
 .contact-container > p {
     text-align: center;
-    color: #555;
+    color: #161616;
     margin-bottom: 20px;
 }
 
