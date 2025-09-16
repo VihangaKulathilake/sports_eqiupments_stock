@@ -1,0 +1,108 @@
+/* Layout */
+.edit-supplier-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+}
+
+.edit-supplier-container h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.edit-supplier-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-supplier-container label {
+    font-weight: 600;
+}
+
+.edit-supplier-container input[type="text"],
+.edit-supplier-container input[type="email"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+.edit-supplier-container button,
+.edit-supplier-container .cancel-btn {
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+    text-align: center;
+}
+
+.edit-supplier-container button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.edit-supplier-container button:hover {
+    background-color: #0056b3;
+}
+
+.edit-supplier-container .cancel-btn {
+    display: inline-block;
+    background-color: #ccc;
+    color: #333;
+    text-decoration: none;
+}
+
+.edit-supplier-container .cancel-btn:hover {
+    background-color: #999;
+}
+
+/* Toast messages */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+}
+
+.toast-error {
+    background-color: #e74c3c;
+}
+
+.toast-success {
+    background-color: #2ecc71;
+}
+
+.toast .toast-close {
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .edit-supplier-container {
+        padding: 15px;
+    }
+
+    .edit-supplier-container h1 {
+        font-size: 1.5rem;
+    }
+}
