@@ -1,76 +1,108 @@
-/* Container and form */
+/* --- Body Background and Overall Layout --- */
 .auth-container {
+   
+    background: url('../imgs copy/343561.jpg') no-repeat center center fixed;
+    background-size: cover;
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
-    padding: 10px;
-    background-color: #f0f2f5; /* A light background for the body */
     min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
+/* --- Form Container --- */
 .auth-form {
     color: black;
-    background-color: rgba(215, 228, 241, 0.6);
-    width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    margin: 20px;
+    background-color: rgba(255, 255, 255, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 40px;
     text-align: center;
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 450px;
 }
 
-/* Form heading */
+/* --- Form Heading --- */
 .auth-form h1 {
-    color: #333;
+    color: #767676b5;
+    font-size: 1.7em;
+    margin-bottom: 20px;
+    font-weight: bold;    
+}
+
+/* --- Logo Styling --- */
+.logo-container {
     margin-bottom: 20px;
 }
 
-/* Inputs, select, and buttons */
+.logo-container img {
+    max-width: 170px;
+    height: auto;
+}
+
+/* --- Inputs, Select, and Buttons --- */
 input[type="text"],
 input[type="password"],
 input[type="file"],
-select,
-.auth-btn,
-.cancel-btn {
-    width: 90%;
-    max-width: 90%;
-    padding: 10px;
+select {
+    width: 100%;
+    padding: 15px;
     margin-bottom: 20px;
-    border-radius: 10px;
-    border: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 15px; 
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
     box-sizing: border-box;
-    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
-/* File input label */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #007bff;
+}
+
 .file-label {
-    display: block;
     text-align: left;
-    margin-left: 30px;
-    margin-bottom: 8px;
-    font-size: 14px;
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
 }
 
-/* Auth button */
 .auth-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
     color: white;
-    background-color: rgb(52, 52, 255);
     font-weight: bold;
+    font-size: 1.1em;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .auth-btn:hover {
-    background-color: rgb(30, 30, 200);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #0056b3, #0099cc);
 }
 
-/* Link styling */
+.auth-form p {
+    color: #fff;
+    font-size: 0.9em;
+}
+
 .auth-form p a {
-    color: rgb(52, 52, 255);
+    color: #00c6ff;
     text-decoration: none;
     font-weight: bold;
 }
@@ -79,37 +111,14 @@ select,
     text-decoration: underline;
 }
 
-/* Logo and image */
-.logo-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.logo-container img {
-    max-width: 200px;
-    height: auto;
-}
-
-/* Responsive adjustments */
+/* --- Media Queries for Responsiveness --- */
 @media (max-width: 768px) {
     .auth-form {
-        width: 90%;
         padding: 30px;
     }
 
-    input[type="text"],
-    input[type="password"],
-    input[type="file"],
-    select,
-    .auth-btn {
-        width: 95%;
-    }
-}
-
-@media (max-width: 480px) {
-    .auth-form {
-        padding: 20px;
+    .auth-form h1 {
+        font-size: 1.7em;
     }
 
     input[type="text"],
@@ -117,6 +126,6 @@ select,
     input[type="file"],
     select,
     .auth-btn {
-        width: 95%;
+        padding: 12px;
     }
 }
