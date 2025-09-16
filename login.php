@@ -11,7 +11,11 @@
             <img src="imgs/E11.png" alt="logo">
         </div>
         <h1>Login </h1>
+<<<<<<< Updated upstream
         <input type="text" name="uname" id="uname" placeholder=" Username / Email "><br><br>
+=======
+        <input type="text" name="uname" id="uname" placeholder="Username / Email"><br><br>
+>>>>>>> Stashed changes
         <input type="password" name="pwd" id="pwd" placeholder="Password"><br><br>
         <input class="auth-btn" type="submit" name="submit" value="Login"><br><br>
         <p>Don't have an account? <a href="signUp.php">Sign up</a></p>
