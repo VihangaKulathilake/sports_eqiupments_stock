@@ -22,7 +22,7 @@
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     padding: 40px;
     text-align: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(10px);
     width: 100%;
     max-width: 450px;
@@ -30,8 +30,8 @@
 
 /* --- Form Heading --- */
 .auth-form h1 {
-    color: #333232b6;
-    font-size: 2em;
+    color: #484848;
+    font-size: 1.7em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -54,6 +54,7 @@ select {
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
+    border-radius: 15px; 
     border: 1px solid #ddd;
     background-color: rgba(255, 255, 255, 0.8);
     font-size: 1em;
@@ -85,14 +86,14 @@ select:focus {
     font-weight: bold;
     font-size: 1.1em;
     cursor: pointer;
-    background:  #007bff;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
     transition: transform 0.2s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .auth-btn:hover {
     transform: translateY(-2px);
-    background:  #0056b3;
+    background: linear-gradient(135deg, #0056b3, #0099cc);
 }
 
 .auth-form p {
@@ -117,7 +118,7 @@ select:focus {
     }
 
     .auth-form h1 {
-        font-size: 2em;
+        font-size: 1.7em;
     }
 
     input[type="text"],
