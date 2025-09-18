@@ -1,5 +1,7 @@
 <?php
-
+    $pageTitle = "About Us";
+    $cssFile = "css/about.css";
+    include 'userHeader.php';
 ?>
 
 <!DOCTYPE html>
@@ -52,11 +54,14 @@
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section class="cta">
-    <h2>Be Part of Our Journey</h2>
-    <p>Join thousands of athletes who trust Sportivo to fuel their passion.</p>
-  </section>
-
+  
+  <section class="call-to-action">
+        <h2>Ready to Gear Up?</h2>
+        <p>Explore our wide range of products and find the perfect gear for your sport.</p>
+        <a href="index.php" class="cta-btn">Start Shopping</a>
+    </section>
 </body>
 </html>
+<?php
+    include 'footer.php';
+?>
