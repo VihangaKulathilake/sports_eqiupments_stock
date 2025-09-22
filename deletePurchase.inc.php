@@ -46,7 +46,6 @@ mysqli_stmt_bind_param($stmtPurchase, "i", $purchaseId);
 $executedPurchase = mysqli_stmt_execute($stmtPurchase);
 mysqli_stmt_close($stmtPurchase);
 
-//redirect session message
 if($executedItems && $executedPurchase){
     $_SESSION['success_msg'] = "Purchase deleted successfully.";
     header("Location: ../purchases.php?deleted=1");
