@@ -15,7 +15,6 @@ $customerId=$_SESSION['customer_id'];
 
 //Buy now option
 if(isset($_POST['product_id'])&&isset($_POST['quantity'])&&!isset($_POST['confirm_order'])){
-    //If coming directly from Buy Now button
     $buyProductId=(int)$_POST['product_id'];
     $buyQuantity=(int)$_POST['quantity'];
     $_SESSION['cart']=[$buyProductId=>$buyQuantity];
