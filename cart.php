@@ -4,7 +4,7 @@ $pageTitle="Shopping Cart";
 $cssFile="css/cart.css";
 include 'userHeader.php';
 
-//fetch products from user cart
+//Get products from user cart
 $cart = $_SESSION['cart'] ?? [];
 
 if(isset($_SESSION['customer_id'])){
