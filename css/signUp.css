@@ -1,0 +1,131 @@
+
+.auth-container {
+   
+    background: url('../imgs copy/343561.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.auth-form {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    padding: 40px;
+    text-align: center;
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 450px;
+}
+
+
+.auth-form h1 {
+    color: #767676b5;
+    font-size: 1.7em;
+    margin-bottom: 20px;
+    font-weight: bold;    
+}
+
+
+.logo-container {
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 170px;
+    height: auto;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px; 
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus,
+select:focus {
+    border-color: #007bff;
+}
+
+.file-label {
+    text-align: left;
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #0056b3, #0099cc);
+}
+
+.auth-form p {
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.auth-form p a {
+    color: #00c6ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-form p a:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    .auth-form {
+        padding: 30px;
+    }
+
+    .auth-form h1 {
+        font-size: 1.7em;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="file"],
+    select,
+    .auth-btn {
+        padding: 12px;
+    }
+}

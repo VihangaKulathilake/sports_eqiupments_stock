@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/auth.css"> <title>Sign up</title>
+    <link rel="stylesheet" href="css/signUp.css"> <title>Sign up</title>
 </head>
 <body class="auth-container">
     <form class="auth-form" action="includes/signUp.inc.php" method="post" enctype="multipart/form-data">
