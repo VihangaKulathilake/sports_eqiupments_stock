@@ -15,7 +15,6 @@ $customerId=$_SESSION['customer_id'];
 
 //Buy now option
 if(isset($_POST['product_id'])&&isset($_POST['quantity'])&&!isset($_POST['confirm_order'])){
-    //If coming directly from Buy Now button
     $buyProductId=(int)$_POST['product_id'];
     $buyQuantity=(int)$_POST['quantity'];
     $_SESSION['cart']=[$buyProductId=>$buyQuantity];
@@ -103,18 +102,16 @@ if(isset($_POST['confirm_order'])){
                     $stockQty = $stockRow['quantity'];
 
                     if($stockQty >= $remainingQty){
-                        // Deduct only what is needed
                         $newQty = $stockQty - $remainingQty;
                         $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
                         $stmtUpdateStock = mysqli_prepare($connect,$sqlUpdateStock);
                         mysqli_stmt_bind_param($stmtUpdateStock,"ii",$newQty,$stockId);
                         if(!mysqli_stmt_execute($stmtUpdateStock)){
                             $error = true;
-                            break 2; // stop both loops
+                            break 2; 
                         }
-                        $remainingQty = 0; // all deducted
+                        $remainingQty = 0; 
                     } else {
-                        // Use up this stock completely
                         $remainingQty -= $stockQty;
                         $newQty = 0;
                         $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
