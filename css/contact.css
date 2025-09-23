@@ -150,7 +150,7 @@ body {
     background-color: #45a049;
 }
 
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .contact-container {
         padding: 15px;

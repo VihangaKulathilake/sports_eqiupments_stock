@@ -1,5 +1,4 @@
 <?php
-$cssFile = "css/resetPassword.css";
 session_start();
 include 'includes/db.php';
 

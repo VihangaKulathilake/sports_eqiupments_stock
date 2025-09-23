@@ -23,7 +23,7 @@ if(isset($_SESSION['customer_id'])){
 }
 
 if(empty($cart)){
-    echo "<p style='text-align:center;'>Your cart is empty.</p>";
+    echo "<h1 style='text-align:center;'>Your cart is empty.</h1>";
     include 'footer.php';
     exit();
 }

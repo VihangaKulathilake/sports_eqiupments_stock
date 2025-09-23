@@ -1,9 +1,20 @@
 <?php
 $pageTitle = "Purchases";
 $cssFile = "css/purchases.css";
+$extraCss = "css/toast.css";
 include 'includes/db.php';
 include 'adminHeader.php';
 ?>
+
+<!-- toast messages -->
+<?php if(isset($_SESSION['error_msg'])): ?>
+    <div class="toast toast-error"><?= $_SESSION['error_msg']; ?> <span class="toast-close">&times;</span></div>
+<?php unset($_SESSION['error_msg']); endif; ?>
+
+<?php if(isset($_SESSION['success_msg'])): ?>
+    <div class="toast toast-success"><?= $_SESSION['success_msg']; ?> <span class="toast-close">&times;</span></div>
+<?php unset($_SESSION['success_msg']); endif; ?>
+
 
 <div class="purchases-container">
     <div class="table-container">
@@ -14,7 +25,7 @@ include 'adminHeader.php';
                 <th>Supplier ID</th>
                 <th>Order Date</th>
                 <th>Order Status</th>
-                <th>Actions</th>
+                <th>Managee Purchases</th>
             </tr>
         </thead>
     <?php
@@ -30,8 +41,8 @@ include 'adminHeader.php';
             echo"<td>".$row['order_status']."</td>";
             echo "<td>
                     <div class='actions-container'>
-                        <button class='edit' onclick=\"location.href='edit.php?id=".$row['supplier_order_id']."'\">Edit</button>
-                        <button class='delete' onclick=\"if(confirm('Delete this user?')) location.href='delete.php?id=".$row['supplier_order_id']."'\">Delete</button>
+                        <button class='edit' onclick=\"location.href='editPurchase.php?id=".$row['supplier_order_id']."'\"><img src='imgs/edit.png' class='btn-icon' alt='view-icon'>Edit</button>
+                        <button class='delete' onclick=\"location.href='includes/deletePurchase.inc.php?id=".$row['supplier_order_id']."'\"><img src='imgs/trash.png' class='btn-icon' alt='view-icon'>Delete</button>
                     </div>
                 </td>";
             echo"</tr>";
@@ -40,7 +51,11 @@ include 'adminHeader.php';
     ?>
     </table>
     </div>
+    <a href="adminDashboard.php" class="btn-back">Back</a>
 </div>
+
+<!-- animate toast message -->
+<script src="js/toast.js"></script>
 
 <?php
 include 'footer.php';

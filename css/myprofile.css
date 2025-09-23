@@ -1,4 +1,4 @@
-
+/* Center container */
 .myProfileContainer {
     display: flex;
     justify-content: flex-start;
@@ -100,7 +100,7 @@
     background-color: #0056b3;
 }
 
-
+/* Responsive adjustments */
 @media (max-width: 900px) {
     .profileCard {
         flex-direction: column;

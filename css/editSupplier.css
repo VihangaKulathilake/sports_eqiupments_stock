@@ -2,10 +2,10 @@
 .edit-supplier-container {
     max-width: 600px;
     margin: 30px auto;
-    padding: 25px;
+    padding: 35px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     font-family: sans-serif;
 }
 
@@ -49,12 +49,12 @@
 }
 
 .edit-supplier-container button {
-    background-color: #007bff;
+    background-color: rgb(52, 52, 255);
     color: #fff;
 }
 
 .edit-supplier-container button:hover {
-    background-color: #0056b3;
+    background-color: rgb(30, 30, 200);
 }
 
 .edit-supplier-container .cancel-btn {
@@ -99,7 +99,7 @@
 /* Responsive */
 @media (max-width: 500px) {
     .edit-supplier-container {
-        padding: 15px;
+        width: 80%;
     }
 
     .edit-supplier-container h1 {

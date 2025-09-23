@@ -47,8 +47,9 @@
 }
 
 .cart-table th {
-    background-color: rgb(89, 143, 243);
-    color: white;
+    background-color: rgb(241, 242, 245);
+    color: rgb(0, 0, 0);
+    font-size: 1.3em;
     border: 1px solid rgb(224, 224, 224);
 }
 
@@ -56,6 +57,7 @@
 .cart-table td {
     padding: 15px;
     text-align: center;
+    font-size: 1.2em;
     border: 1px solid rgb(224, 224, 224);
     white-space: nowrap;
 }
@@ -63,7 +65,7 @@
 /* Product Images */
 .cart-table img {
     width: 100%;
-    max-width: 200px;
+    max-width: 120px;
     height: auto;
     object-fit: cover;
     border-radius: 10px;
@@ -74,8 +76,9 @@
     font-weight: bold;
     font-size: 1.3em;
     border: 1px solid rgb(201, 201, 201);
-    background-color: rgb(62, 62, 62);
-    color: #fff;
+    background-color: rgb(241, 242, 245);
+    color: rgb(0, 0, 0);
+    font-size: 1.3em;
 }
 
 /*buttons */

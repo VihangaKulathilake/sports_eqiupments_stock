@@ -92,8 +92,8 @@ include 'adminHeader.php';
                 echo "<td>LKR. ".number_format($order['amount'], 2)."</td>";
                 echo "<td>
                         <div class='actions-container'>
-                            <button class='edit' onclick=\"location.href='editOrder.php?id={$orderId}&from=recentOrders'\">Edit</button>
-                            <button class='delete' onclick=\"if(confirm('Delete this order?')) location.href='includes/deleteOrder.inc.php?id={$orderId}&from=recentOrders'\">Delete</button>
+                            <button class='edit' onclick=\"location.href='editOrder.php?id={$orderId}&from=recentOrders'\"><img src='imgs/edit.png' class='btn-icon' alt='view-icon'>Edit</button>
+                            <button class='delete' onclick=\"if(confirm('Delete this order?')) location.href='includes/deleteOrder.inc.php?id={$orderId}&from=recentOrders'\"><img src='imgs/trash.png' class='btn-icon' alt='view-icon'>Delete</button>
                         </div>
                     </td>";
                 echo "</tr>";
@@ -103,6 +103,7 @@ include 'adminHeader.php';
         </tbody>
         </table>
     </div>
+    <a href="adminDashboard.php" class="btn-back">Back</a>
 </div>
 
 <!-- animate toast message -->

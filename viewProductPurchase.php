@@ -6,6 +6,21 @@ include 'includes/db.php';
 include 'userHeader.php';
 
 $pId = $_GET["product_id"] ?? null;
+$category = $_GET["category"] ?? null;
+$name = $_GET["name"] ?? null;
+
+echo '<div class="breadcrumb">';
+    echo '<a href="displayProducts.php">Products</a>';
+
+    if ($category) {
+        echo '<a href="displayProductsCategory.php?category='. urlencode($category) .'">'. htmlspecialchars($category) .'</a>';
+    }
+
+    if ($pId) {
+        echo '<a href="viewProductPurchase.php?product_id='. urlencode($pId).'">'. htmlspecialchars($name) .'</a>';
+    }
+echo '</div>';
+
 
 if (isset($_SESSION['toast_message'])) {
     $msg = $_SESSION['toast_message'];
@@ -133,7 +148,7 @@ function showToast(message, type = "error") {
 //update stock text dynamically
 function updateStockText(qty) {
     const remainingStock = availableStock - qty;
-    if (remainingStock <= 0) {
+    if (remainingStock < 1) {
         stockText.textContent = 'OUT OF STOCK';
         stockText.className = 'out-of-stock';
     } else if (remainingStock < 10) {
@@ -145,6 +160,7 @@ function updateStockText(qty) {
     }
 }
 
+
 //update quantities and stock
 function updateQuantities(qty) {
     cartQuantity.value = qty;
@@ -152,23 +168,24 @@ function updateQuantities(qty) {
 
     const remainingStock = availableStock - qty;
 
-    if (availableStock === 0 || remainingStock <= 0) {
-        addToCartBtn.disabled = true;
-        buyNowBtn.disabled = true;
-        showToast('Sorry, this product is out of stock!');
-    } else if (qty > availableStock) {
-        addToCartBtn.disabled = true;
-        buyNowBtn.disabled = true;
-        showToast('You reached the maximum available stock!');
-        quantityInput.value = availableStock;
-        cartQuantity.value = availableStock;
-        buyQuantity.value = availableStock;
-    } else {
-        addToCartBtn.disabled = false;
-        buyNowBtn.disabled = false;
-        if (qty === availableStock) {
+        if (availableStock === 0) {
+            addToCartBtn.disabled = true;
+            buyNowBtn.disabled = true;
+            showToast('Sorry, this product is out of stock!');
+        } else if (qty > availableStock) {
+            quantityInput.value = availableStock;
+            cartQuantity.value = availableStock;
+            buyQuantity.value = availableStock;
             showToast('You reached the maximum available stock!');
+            addToCartBtn.disabled = false;
+            buyNowBtn.disabled = false;
+        } else {
+            addToCartBtn.disabled = false;
+            buyNowBtn.disabled = false;
+            if (qty === availableStock) {
+                showToast('You reached the maximum available stock!');
         }
+
     }
 
     updateStockText(qty);

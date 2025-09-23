@@ -1,39 +1,38 @@
-
-.edit-order-container {
+/*layout*/
+.edit-purchase-container {
     max-width: 1000px;
     margin: 20px auto;
     padding: 20px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.edit-order-container h1 {
+.edit-purchase-container h1 {
     font-size: 1.8rem;
     margin-bottom: 10px;
     text-align: center;
 }
 
-.edit-order-container p {
+.edit-purchase-container p {
     font-size: 1rem;
     margin-bottom: 20px;
     text-align: center;
 }
 
-/*form*/
-.edit-order-container form {
+.edit-purchase-container form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.edit-order-container label {
+.edit-purchase-container label {
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.edit-order-container select,
-.edit-order-container input[type="number"] {
+.edit-purchase-container select,
+.edit-purchase-container input[type="number"] {
     padding: 8px;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -41,29 +40,27 @@
     width: 60%;
 }
 
-/*table*/
-.edit-order-container table {
+.edit-purchase-container table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
     font-size: 0.95rem;
 }
 
-.edit-order-container table th,
-.edit-order-container table td {
+.edit-purchase-container table th,
+.edit-purchase-container table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
 }
 
-.edit-order-container table th {
+.edit-purchase-container table th {
     background: #f8f9fa;
     font-weight: bold;
 }
 
-/* Buttons */
-.edit-order-container button,
-.edit-order-container .cancel-btn {
+.edit-purchase-container button,
+.edit-purchase-container .cancel-btn {
     padding: 12px 16px;
     border-radius: 8px;
     font-size: 1rem;
@@ -72,16 +69,16 @@
     transition: 0.2s;
 }
 
-.edit-order-container button {
-    background: #007bff;
+.edit-purchase-container button {
+    background-color: rgb(52, 52, 255);
     color: white;
 }
 
-.edit-order-container button:hover {
-    background: #0056b3;
+.edit-purchase-container button:hover {
+    background-color: rgb(30, 30, 200);
 }
 
-.edit-order-container .cancel-btn {
+.edit-purchase-container .cancel-btn {
     display: inline-block;
     background: #ccc;
     text-decoration: none;
@@ -89,7 +86,7 @@
     color: #333;
 }
 
-.edit-order-container .cancel-btn:hover {
+.edit-purchase-container .cancel-btn:hover {
     background: #999;
 }
 
@@ -103,16 +100,16 @@
         font-size: 1.5rem;
     }
 
-    
+    /* Horizontal scroll instead of stacking */
     .edit-order-container {
-        overflow-x: auto; 
+        overflow-x: auto; /* enable scroll */
     }
 
     .edit-order-container table {
-        min-width: 600px; 
+        min-width: 600px; /* ensure table has width so scroll activates */
     }
 
-  
+    /* Optional: slim scrollbar for modern look */
     .edit-order-container::-webkit-scrollbar {
         height: 6px;
     }

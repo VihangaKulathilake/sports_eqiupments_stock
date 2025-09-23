@@ -8,7 +8,6 @@ if(isset($_POST["submit"])){
     $pPrice=$_POST["pPrice"];
     $pSup=$_POST["pSup"];
     $newFileName=null;
-    //$createrId=$_SESSION["id"];
 
     require_once 'db.php';
     require_once 'functions.inc.php';
@@ -46,16 +45,16 @@ if(isset($_POST["submit"])){
                 move_uploaded_file($fileTmpName,$fileDestination);
                 
             }else {
-                header("Location:../signUp.php?error=File too large");
+                header("Location:../insertProduct.php?error=File too large");
                 exit();
             }
 
             }else {
-                header("location: ../signUp.php?error=upload error");
+                header("location: ../insertProduct.php?error=upload error");
                 exit();
             }
         }else {
-            header("Location:../signUp.php?error=Invalid file type");
+            header("Location:../insertProduct.php?error=Invalid file type");
             exit();
         }
     }
@@ -64,6 +63,6 @@ if(isset($_POST["submit"])){
     registerProduct($connect,$pName,$pDes,$newFileName,$pCat,$pPrice,$pSup);
 
 }else{
-    header('Location:../signUp.php');
+    header('Location:../insertProduct.php');
     exit();
 }

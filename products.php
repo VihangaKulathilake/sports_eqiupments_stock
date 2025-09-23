@@ -1,10 +1,22 @@
 <?php
 $pageTitle = "Admin Products";
 $cssFile = "css/products.css";
+$extraCss = "css/toast.css";
 include 'includes/db.php';
 include 'adminHeader.php';
+
+//toast messages
+if (isset($_SESSION['success_msg'])) {
+    echo "<div class='toast toast-success show'>".$_SESSION['success_msg']."</div>";
+    unset($_SESSION['success_msg']);
+}
+if (isset($_SESSION['error_msg'])) {
+    echo "<div class='toast toast-error show'>".$_SESSION['error_msg']."</div>";
+    unset($_SESSION['error_msg']);
+}
 ?>
 
+<!-- products table -->
 <div class="products-container">
     <div class="table-container">
         <table>
@@ -15,7 +27,7 @@ include 'adminHeader.php';
                 <th>Category</th>
                 <th>Price (LKR)</th>
                 <th>Supplier ID</th>
-                <th>Actions</th>
+                <th>Manage Products</th>
             </tr>
         </thead>
     <?php
@@ -32,9 +44,9 @@ include 'adminHeader.php';
             echo"<td>".$row['supplier_id']."</td>";
             echo "<td>
                     <div class='actions-container'>
-                        <button class='view-product' onclick=\"location.href='viewProduct.php?product_id=".$row['product_id']."'\">View</button>
-                        <button class='edit' onclick=\"location.href='edit.php?id=".$row['product_id']."'\">Edit</button>
-                        <button class='delete' onclick=\"if(confirm('Delete this product?')) location.href='delete.php?id=".$row['product_id']."'\">Delete</button>
+                        <button class='view-product' onclick=\"location.href='viewProduct.php?id=".$row['product_id']."&from=products'\"><img src='imgs/eye.png' class='btn-icon' alt='view-icon'>View</button>
+                        <button class='edit' onclick=\"location.href='editProduct.php?id=".$row['product_id']."&from=products'\"><img src='imgs/edit.png' class='btn-icon' alt='view-icon'>Edit</button>
+                        <button class='delete' onclick=\"if(confirm('Delete this product?')) location.href='includes/deleteProduct.inc.php?id=".$row['product_id']."&from=products'\"><img src='imgs/trash.png' class='btn-icon' alt='view-icon'>Delete</button>
                     </div>
                 </td>";
             echo"</tr>";
@@ -43,7 +55,11 @@ include 'adminHeader.php';
     ?>
     </table>
     </div>
+    <a href="adminDashboard.php" class="btn-back">Back</a>
 </div>
+
+<!-- toast Animation Script -->
+<script src="js/toast.js"></script>
 
 <?php
 include 'footer.php';

@@ -10,9 +10,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 10px;
-    max-width: 1400px;
+    max-width: 1500px;
     width: 100%;
-    justify-items: center;
     justify-items: center;
     margin: 10px auto;
     background-color: #d6d6d6a6;
@@ -30,7 +29,7 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
-    width: 160px;
+    width: 180px;
     height: 60px;
     text-align: center;
     overflow: hidden;
@@ -89,9 +88,14 @@
     border-color: #6f42c1;
 }
 
-.make-order:hover { 
+.insert-product:hover { 
     background-color: #c16042b2;
     border-color: #ce3535;
+}
+
+.insert-supplier:hover {
+    background-color: #4266c1;
+    border-color: #462fa2;   
 }
 
 .charts {
@@ -107,6 +111,10 @@ div.charts{
     top: 1;
     display: flex;
     justify-content: center;
+}
+
+h1.charts {
+    margin-bottom: 0;
 }
 
 .charts-left, .charts-right {
@@ -383,7 +391,7 @@ div.progress-bars{
 }
 
 .order-progress-bar {
-    width: 60%;
+    width: 200px;
     background-color: #ddd;
     border-radius: 25px;
     overflow: hidden;
@@ -402,7 +410,7 @@ div.progress-bars{
 }
 
 .sup-order-progress-bar {
-    width: 60%;
+    width: 200px;
     background-color: #ddd;
     border-radius: 25px;
     overflow: hidden;
@@ -420,3 +428,234 @@ div.progress-bars{
     transition: width 0.5s ease-in-out;
 }
 
+.sup-order-progress-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-progress-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legend-wrapper {
+    max-height: 20px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    font-size: 14px;
+    gap: 5px;
+}
+
+.legend div {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.legend span {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    border-radius: 3px;
+}
+
+
+/* responsive styles */
+@media (max-width: 1200px) {
+    .charts {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .charts-left, .charts-right {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .bar-chart-container, .pie-chart-container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .bar-chart {
+        padding: 20px;
+        gap: 10px;
+        height: 200px;
+    }
+
+    .bar {
+        width: 25px;
+        height: 100%;
+    }
+
+    .bar-fill {
+        max-height: 100%;
+    }
+
+    .bar-label {
+        font-size: 12px;
+    }
+
+    .bar-value {
+        font-size: 10px;
+    }
+
+    .bar-chart-stats > div, .pie-chart-stats div {
+        height: auto;
+        padding: 15px;
+    }
+
+    .pie {
+        width: 250px;
+    }
+
+    .legend {
+        font-size: 12px;
+        gap: 4px;
+    }
+
+    .order-progress-bar, .sup-order-progress-bar {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .overviewcards {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        padding: 20px 10px;
+        gap: 15px;
+    }
+
+    .dashboard-card {
+        width: 140px;
+        height: 60px;
+        padding: 15px;
+    }
+
+    .card-title img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-title h2 {
+        font-size: 14px;
+    }
+
+    .bar-chart {
+        height: 180px;
+        padding: 15px;
+        gap: 8px;
+    }
+
+    .bar {
+        width: 20px;
+        height: 100%;
+    }
+
+    .bar-fill {
+        max-height: 100%;
+    }
+
+    .bar-label {
+        font-size: 11px;
+    }
+
+    .bar-value {
+        font-size: 10px;
+    }
+
+    .pie {
+        width: 200px;
+    }
+
+    .bar-chart-stats > div, .pie-chart-stats div {
+        font-size: 14px;
+        height: auto;
+        padding: 12px;
+    }
+
+    .legend {
+        font-size: 11px;
+        gap: 3px;
+    }
+
+    .order-progress-bar, .sup-order-progress-bar {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .overviewcards {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        padding: 15px 5px;
+        gap: 10px;
+    }
+
+    .dashboard-card {
+        width: 120px;
+        height: 60px;
+        padding: 10px;
+    }
+
+    .card-title img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .card-title h2 {
+        font-size: 12px;
+    }
+
+    .bar-chart {
+        height: 150px;
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .bar {
+        width: 15px;
+        height: 100%;
+    }
+
+    .bar-fill {
+        max-height: 100%;
+    }
+
+    .bar-label {
+        font-size: 10px;
+    }
+
+    .bar-value {
+        font-size: 9px;
+    }
+
+    .pie {
+        width: 150px;
+    }
+
+    .bar-chart-stats > div, .pie-chart-stats div {
+        font-size: 12px;
+        padding: 10px;
+        height: auto;
+    }
+
+    .legend {
+        font-size: 10px;
+    }
+
+    .order-progress-bar, .sup-order-progress-bar {
+        width: 100%;
+    }
+}

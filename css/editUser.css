@@ -1,19 +1,16 @@
 .edit-user-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 35px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    font-family: sans-serif;
 }
 
 .edit-user-form {
-    color: black;
-    background-color: rgba(215, 228, 241, 0.6);
-    width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    margin: 20px;
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
@@ -23,7 +20,7 @@
     text-align: left;
     margin-left: 30px;
     margin-bottom: 8px;
-    font-size: 14px;
+    font-weight: 600;
 }
 
 /* Inputs, textarea, buttons */
@@ -43,12 +40,14 @@ input[type="text"],
     font-size: 16px;
 }
 
+input[type="text"] {
+    background-color: white;
+    border: 1px solid #ccc;
+}
 
-/* Update button */
 .edit-user {
     color: white;
     background-color: rgb(52, 52, 255);
-    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -57,11 +56,9 @@ input[type="text"],
     background-color: rgb(30, 30, 200);
 }
 
-/* Cancel button */
 .cancel-user {
     background-color: #ccc;
     color: #333;
-    font-weight: bold;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
@@ -72,7 +69,6 @@ input[type="text"],
     background-color: #999;
 }
 
-/* File input */
 input[type="file"] {
     display: block;
     width: 90%;
@@ -81,7 +77,6 @@ input[type="file"] {
     box-sizing: border-box;
 }
 
-/* Current image preview */
 .current-image-container {
     display: flex;
     flex-direction: column;
@@ -104,53 +99,9 @@ input[type="file"] {
     color: #333;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .edit-user-form {
-        width: 90%;
-        padding: 30px;
-    }
-
-    .user-label,
-    .user-image-upload {
-        margin-left: 20px;
-    }
-
-    input[type="file"] {
-        width: 95%;
-        margin-left: 20px;
-    }
-
-    .current-image-container {
-        margin-left: 20px;
-    }
-
-    input[type="text"],
-    .edit-user,
-    .cancel-user {
-        width: 95%;
-    }
-}
-
-@media (max-width: 480px) {
-    .edit-user-form {
-        padding: 20px;
-    }
-
-    .user-label,
-    .user-image-upload,
-    input[type="file"],
-    .current-image-container {
-        margin-left: 10px;
-    }
-
-    input[type="text"],
-    .edit-user,
-    .cancel-user {
-        width: 95%;
-    }
-
-    .user-preview {
-        max-width: 150px;
+/* Responsive styles */
+@media (max-width: 600px) {
+    .edit-user-container {
+        width: 80%;
     }
 }

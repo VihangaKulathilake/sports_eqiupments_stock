@@ -35,7 +35,7 @@
             WHERE
                 c.username = ?
             ORDER BY
-                o.order_date DESC;";
+                o.order_id DESC;";
 
     $stmt = mysqli_stmt_init($connect);
 

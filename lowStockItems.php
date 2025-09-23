@@ -1,10 +1,22 @@
 <?php
 $pageTitle = "Low Stock Items";
 $cssFile = "css/lowStockItems.css";
+$extraCss = "css/toast.css";
 include 'includes/db.php';
 include 'adminHeader.php';
-?>
 
+//toast messages
+if(isset($_SESSION['error_msg'])): ?>
+    <div class="toast toast-error"><?= $_SESSION['error_msg']; ?> <span class="toast-close">&times;</span></div>
+    <?php unset($_SESSION['error_msg']); ?>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['success_msg'])): ?>
+    <div class="toast toast-success"><?= $_SESSION['success_msg']; ?> <span class="toast-close">&times;</span></div>
+    <?php unset($_SESSION['success_msg']); ?>
+<?php endif; ?>
+
+<!-- low stocks table -->
 <div class="low-stock-items-container">
     <div class="table-container">
         <table>
@@ -30,8 +42,8 @@ include 'adminHeader.php';
             echo"<td>".$row['last_updated']."</td>";
             echo "<td>
                     <div class='actions-container'>
-                        <button class='view-product' onclick=\"location.href='displayProduct.php?id=" . $row['product_id'] . "'\">View Product</button>
-                        <button class='refill-stock' onclick=\"if(confirm('Delete this user?')) location.href='refillProduct.php?id=".$row['stock_id']."'\">Refill Stock</button>
+                        <button class='edit' onclick=\"location.href='updateStock.php?id={$row['stock_id']}&from=lowStocks'\"><img src='imgs/edit.png' class='btn-icon' alt='view-icon'>Edit</button>
+                        <button class='delete' onclick=\"location.href='includes/deleteStock.inc.php?id={$row['stock_id']}&from=lowStocks'\"><img src='imgs/trash.png' class='btn-icon' alt='view-icon'>Delete</button>
                     </div>
                 </td>";
             echo"</tr>";
@@ -40,7 +52,11 @@ include 'adminHeader.php';
     ?>
     </table>
     </div>
+    <a href="adminDashboard.php" class="btn-back">Back</a>
 </div>
+
+<!-- animate toast messages -->
+<script src="js/toast.js"></script>
 
 <?php
 include 'footer.php';

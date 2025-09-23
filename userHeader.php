@@ -1,7 +1,10 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once 'includes/db.php';
-$profileImg = "imgs/user.png";
+$profileImg = "imgs/default.png";
 if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
     $profileImg = "userImgs/".$_SESSION["image_path"];
 }
@@ -16,10 +19,28 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
   <?php if(isset($cssFile)) { ?>
       <link rel="stylesheet" href="<?php echo $cssFile; ?>">
   <?php } ?>
+  <?php if(isset($extraCss)) { ?>
+      <link rel="stylesheet" href="<?php echo $extraCss; ?>">
+  <?php } ?>
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
   <title><?php echo isset($pageTitle) ? $pageTitle : 'Sidebar Menu'; ?></title>
 </head>
 <body>
+
+<?php if(isset($_SESSION['error_msg'])): ?>
+    <div class="toast toast-error">
+        <?= htmlspecialchars($_SESSION['error_msg']); ?>
+        <span class="toast-close">&times;</span>
+    </div>
+<?php unset($_SESSION['error_msg']); endif; ?>
+
+<?php if(isset($_SESSION['success_msg'])): ?>
+    <div class="toast toast-success">
+        <?= htmlspecialchars($_SESSION['success_msg']); ?>
+        <span class="toast-close">&times;</span>
+    </div>
+<?php unset($_SESSION['success_msg']); endif; ?>
+
   <div class="page-container">
     <div class="headerbar">
       <div class="headerbartop">
@@ -27,21 +48,31 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
           <img src="imgs/png-transparent-hamburger-menu-more-navigation-basic-ui-jumpicon-glyph-icon-removebg-preview.png" alt="Menu Icon" class="icon">
         </div>
         <img src="imgs/E11.png" alt="headerLogo" class="headerLogo">
+      
+      <?php
+        if(isset($_SESSION['customer_id'])) {
 
-        <a href="cart.php" class="cartBtn">
-            <img src="imgs/shopping-cart-black.png" alt="shopping cart" class="cart">
-            <?php
+            echo '<a href="myFavourites.php?customer_id='.$_SESSION['customer_id'].'" class="fav-btn">';
+            echo '<img src="imgs/like.png" alt="like button" class="like">';
+            echo '</a>';
+
+            echo '<a href="cart.php" class="cartBtn">';
+            echo '<img src="imgs/shopping-cart-black.png" alt="shopping cart" class="cart">';
+
             $cartCount = 0;
             if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
                 $cartCount = array_sum($_SESSION['cart']);
             }
             echo "<span class='cartCount'>{$cartCount}</span>";
-            ?>
-        </a>
+            echo '</a>';
 
-        <a href="myProfile.php" class="profileImgLink">
-          <img src="<?php echo $profileImg; ?>" alt="profilePhoto" class="profilePhoto">
-        </a>
+            echo '<a href="myProfile.php" class="profileImgLink">
+                    <img src="'.$profileImg.'" alt="profilePhoto" class="profilePhoto">
+                  </a>';
+        } else {
+            echo '<a href="login.php" class="loginBtn">Login</a>';
+        }
+        ?>
       </div>
 
       <div class="searchbarcontainer">
@@ -74,7 +105,7 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
             <ul class="dropdown-content">
                 <?php foreach($categories as $category): ?>
                     <li>
-                        <a href="displayCategory.php?category=<?= urlencode($category) ?>">
+                        <a href="displayProductsCategory.php?category=<?= urlencode($category) ?>">
                             <?= htmlspecialchars($category) ?>
                         </a>
                     </li>
@@ -83,6 +114,7 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
         </li>
 
 
+        <li><a href="myOrders.php">My Orders</a></li>
         <li><a href="about.php">About Us</a></li>
         <li><a href="contact.php">Contact</a></li>
       </ul>
@@ -91,20 +123,9 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
       </ul>
     </nav>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdown = document.querySelector('.sidebar .navlinks li.dropdown');
+    <script src="js/header.js"></script>
+    <script src="js/toast.js"></script>
 
-        if(dropdown) {
-            const dropBtn = dropdown.querySelector('.dropbtn');
-
-            dropBtn.addEventListener('click', function(e) {
-                e.preventDefault(); // prevent default link behavior
-                dropdown.classList.toggle('active');
-            });
-        }
-    });
-    </script>
 
     <div class="overlay"></div>
 

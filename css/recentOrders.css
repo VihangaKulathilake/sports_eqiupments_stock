@@ -69,6 +69,19 @@ tbody td ul {
     gap: 10px;
 }
 
+button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
 button.edit, button.delete {
     padding: 5px 12px;
     border: none;
@@ -93,6 +106,31 @@ button.delete {
 
 button.delete:hover {
     background-color: #c82333;
+}
+
+.btn-back {
+    float: right;
+    width: 50px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+    border: none;
+    outline: none;
+    margin: 20px 0px 20px 0px;
+}
+
+.btn-back {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
 }
 
 @media (max-width: 600px) {

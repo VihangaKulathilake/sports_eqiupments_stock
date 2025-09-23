@@ -40,6 +40,7 @@
     background-color: #218838;
 }
 
+/* responsive */
 @media (max-width: 768px) {
     .thankyou-container {
         margin: 50px 20px;

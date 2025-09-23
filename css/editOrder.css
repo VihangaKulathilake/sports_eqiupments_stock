@@ -5,7 +5,7 @@
     padding: 20px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .edit-order-container h1 {
@@ -73,12 +73,12 @@
 }
 
 .edit-order-container button {
-    background: #007bff;
+    background-color: rgb(52, 52, 255);
     color: white;
 }
 
 .edit-order-container button:hover {
-    background: #0056b3;
+    background-color: rgb(30, 30, 200);
 }
 
 .edit-order-container .cancel-btn {
@@ -94,7 +94,7 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .edit-order-container {
         padding: 15px;
     }
@@ -103,15 +103,16 @@
         font-size: 1.5rem;
     }
 
+    /* Horizontal scroll instead of stacking */
     .edit-order-container {
-        overflow-x: auto; 
+        overflow-x: auto; /* enable scroll */
     }
 
     .edit-order-container table {
-        min-width: 600px; 
+        min-width: 600px; /* ensure table has width so scroll activates */
     }
 
-    
+    /* Optional: slim scrollbar for modern look */
     .edit-order-container::-webkit-scrollbar {
         height: 6px;
     }

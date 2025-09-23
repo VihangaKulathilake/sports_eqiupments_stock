@@ -4,36 +4,35 @@ $pageTitle="Checkout";
 $cssFile="css/checkout.css";
 include 'userHeader.php';
 
-//Check whether the user logged in or not
+//check if user logged in
 if(!isset($_SESSION['customer_id'])){
     echo "<p>Please <a href='login.php'>log in</a> to proceed to checkout.</p>";
     include 'footer.php';
     exit();
 }
 
-$customerId=$_SESSION['customer_id'];
+$customerId = $_SESSION['customer_id'];
 
-//Buy now option
-if(isset($_POST['product_id'])&&isset($_POST['quantity'])&&!isset($_POST['confirm_order'])){
-    //If coming directly from Buy Now button
-    $buyProductId=(int)$_POST['product_id'];
-    $buyQuantity=(int)$_POST['quantity'];
-    $_SESSION['cart']=[$buyProductId=>$buyQuantity];
+//buy now option
+if(isset($_POST['product_id']) && isset($_POST['quantity']) && !isset($_POST['confirm_order'])){
+    $buyProductId = (int)$_POST['product_id'];
+    $buyQuantity = (int)$_POST['quantity'];
+    $_SESSION['cart'] = [$buyProductId => $buyQuantity];
 }
 
-//Cart option
-$cart=$_SESSION['cart']??[];
+//load cart
+$cart = $_SESSION['cart'] ?? [];
 if(empty($cart)){
-    $sql="SELECT product_id,quantity FROM customer_cart WHERE customer_id=?";
-    if($stmt=mysqli_prepare($connect,$sql)){
-        mysqli_stmt_bind_param($stmt,"i",$customerId);
+    $sql = "SELECT product_id, quantity FROM customer_cart WHERE customer_id=?";
+    if($stmt = mysqli_prepare($connect, $sql)){
+        mysqli_stmt_bind_param($stmt,"i", $customerId);
         mysqli_stmt_execute($stmt);
-        $result=mysqli_stmt_get_result($stmt);
-        $cart=[];
-        while($row=mysqli_fetch_assoc($result)){
-            $cart[$row['product_id']]=$row['quantity'];
+        $result = mysqli_stmt_get_result($stmt);
+        $cart = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $cart[$row['product_id']] = $row['quantity'];
         }
-        $_SESSION['cart']=$cart;
+        $_SESSION['cart'] = $cart;
     }
 }
 
@@ -43,124 +42,112 @@ if(empty($cart)){
     exit();
 }
 
-$productIds=array_keys($cart);
-$placeholders=implode(',',array_fill(0,count($productIds),'?'));
-$sql="SELECT * FROM products WHERE product_id IN ($placeholders)";
-$stmt=mysqli_prepare($connect,$sql);
-$types=str_repeat('i',count($productIds));
-mysqli_stmt_bind_param($stmt,$types,...$productIds);
+//fetch product details
+$productIds = array_keys($cart);
+$placeholders = implode(',', array_fill(0, count($productIds), '?'));
+$sql = "SELECT * FROM products WHERE product_id IN ($placeholders)";
+$stmt = mysqli_prepare($connect, $sql);
+$types = str_repeat('i', count($productIds));
+mysqli_stmt_bind_param($stmt, $types, ...$productIds);
 mysqli_stmt_execute($stmt);
-$result=mysqli_stmt_get_result($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
-$products=[];
-while($row=mysqli_fetch_assoc($result)){
-    $products[$row['product_id']]=$row;
+$products = [];
+while($row = mysqli_fetch_assoc($result)){
+    $products[$row['product_id']] = $row;
 }
 
-//Confirmation of the order
+//confirm order
 if(isset($_POST['confirm_order'])){
-    $error=false;
+    $error = false;
     mysqli_begin_transaction($connect);
 
-    $sqlOrder="INSERT INTO orders (customer_id,order_date,order_status) VALUES (?,CURDATE(),'pending')";
-    if($stmtOrder=mysqli_prepare($connect,$sqlOrder)){
-        mysqli_stmt_bind_param($stmtOrder,"i",$customerId);
+    $sqlOrder = "INSERT INTO orders (customer_id, order_date, order_status) VALUES (?, CURDATE(), 'pending')";
+    if($stmtOrder = mysqli_prepare($connect, $sqlOrder)){
+        mysqli_stmt_bind_param($stmtOrder, "i", $customerId);
         if(mysqli_stmt_execute($stmtOrder)){
-            $orderId=mysqli_insert_id($connect);
+            $orderId = mysqli_insert_id($connect);
 
-            
-            $sqlItem="INSERT INTO order_items (order_id,product_id,quantity) VALUES (?,?,?)";
-            $sqlStock="UPDATE stocks SET quantity=quantity - ?, last_updated=CURDATE() WHERE product_id=? AND quantity>=?";
-            
-            foreach($cart as $pId=>$qty){
+            $sqlItem = "INSERT INTO order_items (order_id, product_id, quantity) VALUES (?, ?, ?)";
 
-                //place order
-                if($stmtItem=mysqli_prepare($connect,$sqlItem)){
-                    mysqli_stmt_bind_param($stmtItem,"iii",$orderId,$pId,$qty);
+            foreach($cart as $pId => $qty){
+                // Insert order item
+                if($stmtItem = mysqli_prepare($connect, $sqlItem)){
+                    mysqli_stmt_bind_param($stmtItem, "iii", $orderId, $pId, $qty);
                     if(!mysqli_stmt_execute($stmtItem)){
-                        $error=true;
+                        $error = true;
                         break;
                     }
-                }else{
-                    $error=true;
+                } else {
+                    $error = true;
                     break;
                 }
 
-                // FIFO Stock Deduction
-                $sqlGetStocks = "SELECT stock_id, quantity 
-                                FROM stocks 
-                                WHERE product_id=? AND quantity>0 
-                                ORDER BY last_updated ASC";
-                $stmtGetStocks = mysqli_prepare($connect,$sqlGetStocks);
-                mysqli_stmt_bind_param($stmtGetStocks,"i",$pId);
+                $sqlGetStocks = "SELECT stock_id, quantity FROM stocks WHERE product_id=? AND quantity>0 ORDER BY last_updated ASC";
+                $stmtGetStocks = mysqli_prepare($connect, $sqlGetStocks);
+                mysqli_stmt_bind_param($stmtGetStocks, "i", $pId);
                 mysqli_stmt_execute($stmtGetStocks);
                 $resStocks = mysqli_stmt_get_result($stmtGetStocks);
 
                 $remainingQty = $qty;
 
-                while(($stockRow = mysqli_fetch_assoc($resStocks)) && $remainingQty > 0){
+                while($remainingQty > 0 && ($stockRow = mysqli_fetch_assoc($resStocks))){
                     $stockId = $stockRow['stock_id'];
                     $stockQty = $stockRow['quantity'];
 
                     if($stockQty >= $remainingQty){
-                        // Deduct only what is needed
                         $newQty = $stockQty - $remainingQty;
-                        $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
-                        $stmtUpdateStock = mysqli_prepare($connect,$sqlUpdateStock);
-                        mysqli_stmt_bind_param($stmtUpdateStock,"ii",$newQty,$stockId);
-                        if(!mysqli_stmt_execute($stmtUpdateStock)){
-                            $error = true;
-                            break 2; // stop both loops
-                        }
-                        $remainingQty = 0; // all deducted
+                        $remainingQty = 0;
                     } else {
-                        // Use up this stock completely
-                        $remainingQty -= $stockQty;
                         $newQty = 0;
-                        $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
-                        $stmtUpdateStock = mysqli_prepare($connect,$sqlUpdateStock);
-                        mysqli_stmt_bind_param($stmtUpdateStock,"ii",$newQty,$stockId);
-                        if(!mysqli_stmt_execute($stmtUpdateStock)){
-                            $error = true;
-                            break 2;
-                        }
+                        $remainingQty -= $stockQty;
+                    }
+
+                    $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
+                    $stmtUpdateStock = mysqli_prepare($connect, $sqlUpdateStock);
+                    mysqli_stmt_bind_param($stmtUpdateStock, "ii", $newQty, $stockId);
+                    if(!mysqli_stmt_execute($stmtUpdateStock)){
+                        $error = true;
+                        break 2;
                     }
                 }
 
+                mysqli_stmt_close($stmtGetStocks);
+
+                if($remainingQty > 0){
+                    $error = true;
+                    break;
+                }
             }
-        }else{
-            $error=true;
+
+        } else {
+            $error = true;
         }
-    }else{
-        $error=true;
+    } else {
+        $error = true;
     }
 
     if($error){
         mysqli_rollback($connect);
         echo "<script>alert('Failed to place the order. Please try again.');</script>";
-    }else{
+    } else {
         mysqli_commit($connect);
 
-        //Clear the cart after order completion
-        if(!isset($_POST['product_id'])&&!isset($_POST['quantity'])){
-            $_SESSION['cart']=[];
-            $sql="DELETE FROM customer_cart WHERE customer_id=?";
-            if($stmt=mysqli_prepare($connect,$sql)){
-                mysqli_stmt_bind_param($stmt,"i",$customerId);
-                mysqli_stmt_execute($stmt);
-            }
-        }else{
-            $_SESSION['cart']=[];
+        //clear cart
+        $_SESSION['cart'] = [];
+        $sql = "DELETE FROM customer_cart WHERE customer_id=?";
+        if($stmt = mysqli_prepare($connect, $sql)){
+            mysqli_stmt_bind_param($stmt, "i", $customerId);
+            mysqli_stmt_execute($stmt);
         }
 
-        //Redirect to thank you page
         header("Location: thankyou.php?order_id=$orderId");
         exit();
     }
 }
 
-//Checkout table
-$grandTotal=0;
+//display checkout table
+$grandTotal = 0;
 echo '<div class="checkout-container">';
 echo '<h2>Checkout</h2>';
 echo '<div class="checkout-table-container">';
@@ -173,14 +160,11 @@ echo '<thead><tr>
         <th>Total</th>
       </tr></thead><tbody>';
 
-foreach($cart as $pId=>$qty){
-    if(!isset($products[$pId])){
-        continue;
-    }
-
-    $product=$products[$pId];
-    $total=$product['price']*$qty;
-    $grandTotal+=$total;
+foreach($cart as $pId => $qty){
+    if(!isset($products[$pId])) continue;
+    $product = $products[$pId];
+    $total = $product['price'] * $qty;
+    $grandTotal += $total;
 
     echo '<tr>';
     echo '<td><img src="productImgs/'.htmlspecialchars($product['image_path']).'" alt="'.htmlspecialchars($product['name']).'"></td>';
@@ -198,17 +182,17 @@ echo '</tr>';
 echo '</tbody></table>';
 echo '</div>';
 
-//Confirm order form
+//buttons
 echo '<form method="POST" class="confirm-order-form">';
-echo '<h3>Select Payment Method</h3>';
-echo '<label><input type="radio" name="payment_method" value="Credit Card" required> Credit Card</label>';
-echo '<label><input type="radio" name="payment_method" value="Cash on Delivery"> Cash on Delivery</label>';
 echo '<div class="form-buttons">';
 
-if(isset($_POST['product_id'])&&isset($_POST['quantity'])){
-    $backProductId=(int)$_POST['product_id'];
-    echo '<a href="viewProductPurchase.php?product_id='.$backProductId.'" class="btn-back">Back</a>';
-}else{
+if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
+    $backProductId = (int)$_POST['product_id'];
+    
+    $backProductName = isset($products[$backProductId]) ? $products[$backProductId]['name'] : '';
+
+    echo '<a href="viewProductPurchase.php?product_id=' . $backProductId . '&name=' . urlencode($backProductName) . '" class="btn-back">Back</a>';
+} else {
     echo '<a href="cart.php" class="btn-back">Back</a>';
 }
 

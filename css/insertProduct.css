@@ -1,40 +1,70 @@
 .insert-product-container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 35px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .insert-product-form{
-    color: black;
-    align-items: center;
-    background-color: rgba(215, 228, 241, 0.6);
-    width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    margin: 30px;
-    padding: 40px;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
 .insert-product{
     color: white;
     background-color: rgb(52, 52, 255);
-    font-size: large;
-    font-weight: bold;
+}
+
+.insert-product:hover{
+    background-color: rgb(30, 30, 200);
 }
 
 .product-image-upload{
     display: block;
     text-align: left;
-    margin-left: 60px;
+    margin-left: 40px;
     margin-bottom: 5px;
     font-size: medium;
 }
 
-input{
-    width: 80%;
-    height: 40px;
+.insert-product-container input,a.cancel-btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
     border-radius: 10px;
-    border-style: none ;
+    border: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+input[type="text"] {
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #999;
+}
+
+/* responsive styles */
+@media (max-width: 600px) {
+    .insert-product-container {
+        width: 80%;
+    }
 }

@@ -1,11 +1,27 @@
 <?php
 $pageTitle = "Dashboard";
 $cssFile = "css/adminDashboard.css";
+$extraCss = "css/toast.css";
 include 'adminHeader.php';
 
 $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
             
 ?>
+
+<?php if(isset($_SESSION['error_msg'])): ?>
+    <div class="toast toast-error">
+        <?= htmlspecialchars($_SESSION['error_msg']); ?>
+        <span class="toast-close">&times;</span>
+    </div>
+<?php unset($_SESSION['error_msg']); endif; ?>
+
+<?php if(isset($_SESSION['success_msg'])): ?>
+    <div class="toast toast-success">
+        <?= htmlspecialchars($_SESSION['success_msg']); ?>
+        <span class="toast-close">&times;</span>
+    </div>
+<?php unset($_SESSION['success_msg']); endif; ?>
+
 
 <div class="dashboardcontainer">
     <!--dashboard overviewcards -->
@@ -25,31 +41,32 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
             </div>
         </a>
 
-        <a href="recent-orders.php" class="dashboard-card recent-orders">
+        <a href="recentOrders.php" class="dashboard-card recent-orders">
             <div class="card-title">
                 <img src="imgs/history.png" alt="Recent orders icon">
                 <h2>Recent Orders</h2>
             </div>
         </a>
 
-        <a href="top-customers.php" class="dashboard-card top-customers">
+        <a href="topCustomers.php" class="dashboard-card top-customers">
             <div class="card-title">
                 <img src="imgs/best-customer-experience.png" alt="Top customers icon">
                 <h2>Top Customers</h2>
             </div>
         </a>
 
-        <a href="top-suppliers.php" class="dashboard-card top-suppliers">
-            <div class="card-title">
-                <img src="imgs/supplier.png" alt="Top suppliers icon">
-                <h2>Top Suppliers</h2>
-            </div>
-        </a>
 
         <a href="insertProduct.php" class="dashboard-card insert-product">
             <div class="card-title">
                 <img src="imgs/add.png" alt="Add icon">
                 <h2>Register Product</h2>
+            </div>
+        </a>
+
+        <a href="insertSupplier.php" class="dashboard-card insert-supplier">
+            <div class="card-title">
+                <img src="imgs/add.png" alt="Add icon">
+                <h2>Register Supplier</h2>
             </div>
         </a>
     </div>
@@ -137,7 +154,7 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
             <div class="pie-chart">
                 <?php
-                //pie chart sql
+                //pie chart
                 $sql = "SELECT p.category, SUM(oi.quantity * p.price) AS total_sales
                 FROM orders o
                 JOIN order_items oi ON o.order_id = oi.order_id
@@ -187,6 +204,7 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
                         </svg>
 
                         <!-- Legend under the pie chart -->
+                    <div class="legend-wrapper">
                         <div class="legend">
                             <?php
                             foreach ($categories as $i => $category) {
@@ -195,35 +213,49 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
                             ?>
                         </div>
                     </div>
-
-
-                    <div class="pie-chart-stats">
-                        <?php
-                        //pie chart stats
-                        $maxIndex = array_keys($totalsPerCtgry, max($totalsPerCtgry))[0];
-                        $minIndex = array_keys($totalsPerCtgry, min($totalsPerCtgry))[0];
-                        ?>
-
-                        <div class="top-category">
-                            <h2>Top Category</h2>
-                            <p>
-                                <?php
-                                echo "<p>" . $categories[$maxIndex]."<br>";
-                                echo "LKR " . number_format($totalsPerCtgry[$maxIndex], 2) . "</p>";
-                                ?>
-                            </p>
-                        </div>
-
-                        <div class="low-category">
-                            <h2>Lowest Category</h2>
-                            <p>
-                                <?php
-                                echo "<p>" . $categories[$minIndex]."<br>";
-                                echo "LKR " . number_format($totalsPerCtgry[$minIndex], 2) . "</p>";
-                                ?>
-                            </p>
-                        </div>
                     </div>
+
+            <!-- pie chart stats -->
+            <div class="pie-chart-stats">
+                <?php
+                $totalSalesPie = array_sum($totalsPerCtgry);
+
+                if (empty($totalsPerCtgry) || $totalSalesPie == 0) {
+                    ?>
+                    <div class="top-category">
+                        <h2>Top Category</h2>
+                        <p>-</p>
+                    </div>
+
+                    <div class="low-category">
+                        <h2>Lowest Category</h2>
+                        <p>-</p>
+                    </div>
+                    <?php
+                } else {
+                    $maxIndex = array_keys($totalsPerCtgry, max($totalsPerCtgry))[0];
+                    $minIndex = array_keys($totalsPerCtgry, min($totalsPerCtgry))[0];
+                    ?>
+                    <div class="top-category">
+                        <h2>Top Category</h2>
+                        <p>
+                            <?= htmlspecialchars($categories[$maxIndex]) ?><br>
+                            LKR <?= number_format($totalsPerCtgry[$maxIndex], 2) ?>
+                        </p>
+                    </div>
+
+                    <div class="low-category">
+                        <h2>Lowest Category</h2>
+                        <p>
+                            <?= htmlspecialchars($categories[$minIndex]) ?><br>
+                            LKR <?= number_format($totalsPerCtgry[$minIndex], 2) ?>
+                        </p>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+
             </div>
             <div class="progress-bars">
                 <div class="order-progress-container">
@@ -319,7 +351,7 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
 
             <div class="pie-chart">
                 <?php
-                //pie chart sql
+                //pie chart
                 $sql = "SELECT s.name AS supplier_name, SUM(soi.quantity * p.price) AS total_purchases
                         FROM supplier_orders so
                         JOIN supplier_order_items soi ON so.supplier_order_id = soi.supplier_order_id
@@ -369,43 +401,57 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
                     ?>
                 </svg>
 
-                <div class="legend">
-                        <?php
-                        foreach ($suppliers as $j => $supplier) {
-                            echo "<div><span style='background-color: {$purColors[$j]}'></span> {$supplier} - LKR " . number_format($totalsPerSupplier[$j], 2) . "</div>";
-                        }
-                        ?>
+                <div class="legend-wrapper">
+                    <div class="legend">
+                            <?php
+                            foreach ($suppliers as $j => $supplier) {
+                                echo "<div><span style='background-color: {$purColors[$j]}'></span> {$supplier} - LKR " . number_format($totalsPerSupplier[$j], 2) . "</div>";
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
 
-                <div class="pie-chart-stats">
-                    <?php
-                    //pie chart stats
-                    $maxIndexSup = !empty($totalsPerSupplier) ? array_keys($totalsPerSupplier, max($totalsPerSupplier))[0] : -1;
-                    $minIndexSup = !empty($totalsPerSupplier) ? array_keys($totalsPerSupplier, min($totalsPerSupplier))[0] : -1;
-                    ?>
+            <div class="pie-chart-stats">
+                <?php
+                $totalSalesSup = array_sum($totalsPerSupplier);
 
+                if (empty($totalsPerSupplier) || $totalSalesSup == 0) {
+                    ?>
+                    <div class="top-supplier">
+                        <h2>Top Supplier</h2>
+                        <p>-</p>
+                    </div>
+
+                    <div class="low-supplier">
+                        <h2>Lowest Supplier</h2>
+                        <p>-</p>
+                    </div>
+                    <?php
+                } else {
+                    $maxIndexSup = array_keys($totalsPerSupplier, max($totalsPerSupplier))[0];
+                    $minIndexSup = array_keys($totalsPerSupplier, min($totalsPerSupplier))[0];
+                    ?>
                     <div class="top-supplier">
                         <h2>Top Supplier</h2>
                         <p>
-                            <?php
-                            echo "<p>" . $suppliers[$maxIndexSup]."<br>";
-                            echo "LKR " . number_format($totalsPerSupplier[$maxIndexSup], 2) . "</p>";
-                            ?>
+                            <?= htmlspecialchars($suppliers[$maxIndexSup]) ?><br>
+                            LKR <?= number_format($totalsPerSupplier[$maxIndexSup], 2) ?>
                         </p>
                     </div>
 
                     <div class="low-supplier">
                         <h2>Lowest Supplier</h2>
                         <p>
-                            <?php
-                            echo "<p>" . $suppliers[$minIndexSup]."<br>";
-                            echo "LKR " . number_format($totalsPerSupplier[$minIndexSup], 2) . "</p>";
-                            ?>
+                            <?= htmlspecialchars($suppliers[$minIndexSup]) ?><br>
+                            LKR <?= number_format($totalsPerSupplier[$minIndexSup], 2) ?>
                         </p>
                     </div>
-                </div>
+                    <?php
+                }
+                ?>
             </div>
+
             <div class="progress-bars">
                 <div class="sup-order-progress-container">
                     <?php

@@ -4,13 +4,14 @@
     include 'userHeader.php';
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Sportivo</title>
-  <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="css/about.css">
 </head>
 <body>
 
@@ -54,7 +55,6 @@
     </div>
   </section>
 
-  
   <section class="call-to-action">
         <h2>Ready to Gear Up?</h2>
         <p>Explore our wide range of products and find the perfect gear for your sport.</p>
@@ -65,3 +65,4 @@
 <?php
     include 'footer.php';
 ?>
+
