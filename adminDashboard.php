@@ -62,13 +62,6 @@ $year  = isset($_GET['year']) ? (int)$_GET['year'] : date('Y');
                 <h2>Register Product</h2>
             </div>
         </a>
-
-        <a href="insertSupplier.php" class="dashboard-card insert-supplier">
-            <div class="card-title">
-                <img src="imgs/add.png" alt="Add icon">
-                <h2>Register Supplier</h2>
-            </div>
-        </a>
     </div>
 
     <h2>Year Summary</h2>
