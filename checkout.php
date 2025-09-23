@@ -15,6 +15,7 @@ $customerId=$_SESSION['customer_id'];
 
 //Buy now option
 if(isset($_POST['product_id'])&&isset($_POST['quantity'])&&!isset($_POST['confirm_order'])){
+    //If coming directly from Buy Now button
     $buyProductId=(int)$_POST['product_id'];
     $buyQuantity=(int)$_POST['quantity'];
     $_SESSION['cart']=[$buyProductId=>$buyQuantity];
@@ -67,8 +68,13 @@ if(isset($_POST['confirm_order'])){
         if(mysqli_stmt_execute($stmtOrder)){
             $orderId=mysqli_insert_id($connect);
 
+            
             $sqlItem="INSERT INTO order_items (order_id,product_id,quantity) VALUES (?,?,?)";
+            $sqlStock="UPDATE stocks SET quantity=quantity - ?, last_updated=CURDATE() WHERE product_id=? AND quantity>=?";
+            
             foreach($cart as $pId=>$qty){
+
+                //place order
                 if($stmtItem=mysqli_prepare($connect,$sqlItem)){
                     mysqli_stmt_bind_param($stmtItem,"iii",$orderId,$pId,$qty);
                     if(!mysqli_stmt_execute($stmtItem)){
@@ -79,6 +85,48 @@ if(isset($_POST['confirm_order'])){
                     $error=true;
                     break;
                 }
+
+                // FIFO Stock Deduction
+                $sqlGetStocks = "SELECT stock_id, quantity 
+                                FROM stocks 
+                                WHERE product_id=? AND quantity>0 
+                                ORDER BY last_updated ASC";
+                $stmtGetStocks = mysqli_prepare($connect,$sqlGetStocks);
+                mysqli_stmt_bind_param($stmtGetStocks,"i",$pId);
+                mysqli_stmt_execute($stmtGetStocks);
+                $resStocks = mysqli_stmt_get_result($stmtGetStocks);
+
+                $remainingQty = $qty;
+
+                while(($stockRow = mysqli_fetch_assoc($resStocks)) && $remainingQty > 0){
+                    $stockId = $stockRow['stock_id'];
+                    $stockQty = $stockRow['quantity'];
+
+                    if($stockQty >= $remainingQty){
+                        // Deduct only what is needed
+                        $newQty = $stockQty - $remainingQty;
+                        $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
+                        $stmtUpdateStock = mysqli_prepare($connect,$sqlUpdateStock);
+                        mysqli_stmt_bind_param($stmtUpdateStock,"ii",$newQty,$stockId);
+                        if(!mysqli_stmt_execute($stmtUpdateStock)){
+                            $error = true;
+                            break 2; // stop both loops
+                        }
+                        $remainingQty = 0; // all deducted
+                    } else {
+                        // Use up this stock completely
+                        $remainingQty -= $stockQty;
+                        $newQty = 0;
+                        $sqlUpdateStock = "UPDATE stocks SET quantity=?, last_updated=NOW() WHERE stock_id=?";
+                        $stmtUpdateStock = mysqli_prepare($connect,$sqlUpdateStock);
+                        mysqli_stmt_bind_param($stmtUpdateStock,"ii",$newQty,$stockId);
+                        if(!mysqli_stmt_execute($stmtUpdateStock)){
+                            $error = true;
+                            break 2;
+                        }
+                    }
+                }
+
             }
         }else{
             $error=true;
@@ -154,7 +202,6 @@ echo '</div>';
 echo '<form method="POST" class="confirm-order-form">';
 echo '<h3>Select Payment Method</h3>';
 echo '<label><input type="radio" name="payment_method" value="Credit Card" required> Credit Card</label>';
-echo '<label><input type="radio" name="payment_method" value="PayPal"> PayPal</label>';
 echo '<label><input type="radio" name="payment_method" value="Cash on Delivery"> Cash on Delivery</label>';
 echo '<div class="form-buttons">';
 
