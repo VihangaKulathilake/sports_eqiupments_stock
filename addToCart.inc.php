@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once 'db.php'; // Adjusted path because includes folder is in root
+require_once 'db.php'; 
 
-// Debugging session (optional)
+// Debugging session 
 var_dump($_SESSION);
+
 
 if (!isset($_POST['add_to_cart'])) {
     echo "Error: No form data received.";
