@@ -1,6 +1,6 @@
 <?php
 $pageTitle = "Top Customers";
-$cssFile = "css/topCustomers.css?v=" . time(); // Dynamic version number to force a refresh
+$cssFile = "css/topCustomers.css?v=" . time(); 
 include 'adminHeader.php';
 include 'includes/db.php';
 ?>
@@ -31,7 +31,7 @@ include 'includes/db.php';
 
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    // Check if an image path exists and if the file actually exists on the server
+                    
                     $profileImgPath = "userImgs/" . htmlspecialchars($row['image_path']);
                     if (!empty($row['image_path']) && file_exists($profileImgPath)) {
                         $profileImg = $profileImgPath;
