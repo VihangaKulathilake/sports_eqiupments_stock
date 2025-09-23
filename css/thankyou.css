@@ -10,7 +10,7 @@
 }
 
 .thankyou-container h2 {
-    color: #28a745;
+    color: #303231;
     font-size: 28px;
     margin-bottom: 15px;
 }
@@ -40,7 +40,6 @@
     background-color: #218838;
 }
 
-/* responsive */
 @media (max-width: 768px) {
     .thankyou-container {
         margin: 50px 20px;

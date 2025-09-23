@@ -10,7 +10,6 @@ body {
     padding: 0;
 }
 
-/* Main container */
 .about-container {
     display:  flex;
     flex-direction: column;
@@ -22,7 +21,7 @@ body {
     
 }
 
-/* Shared Section Styles */
+
 .about-hero,
 .about,
 .mission-vision,
@@ -38,7 +37,7 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Hero Section */
+
 .about-hero {
   margin-top: 30px;
     text-align: center;
@@ -148,7 +147,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 1024px) {
     .about-container {
         max-width: 95%;
