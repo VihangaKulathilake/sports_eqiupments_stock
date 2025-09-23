@@ -1,5 +1,5 @@
 <?php
-    include 'adminHeader.php';
+    include 'userHeader.php';
     require_once 'includes/contact.inc.php';
 ?>
 
@@ -51,15 +51,14 @@
 
 <script>
     document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-
+        event.preventDefault(); 
         const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
         const subject = encodeURIComponent(`Contact Form Submission from ${name}`);
         const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
         
-        // This mailto link will open the user's default email client
+       
         window.location.href = `mailto:sportivosports@gmail.com?subject=${subject}&body=${body}`;
     });
 </script>

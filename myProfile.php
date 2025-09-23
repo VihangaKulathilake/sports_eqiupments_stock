@@ -1,4 +1,5 @@
 <?php
+    $pageTitle=" My Profile ";
     include 'userHeader.php';
     require_once 'includes/myProfile.inc.php';
 ?>

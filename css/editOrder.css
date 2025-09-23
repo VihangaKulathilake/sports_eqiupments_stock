@@ -1,4 +1,4 @@
-/*layout*/
+
 .edit-order-container {
     max-width: 1000px;
     margin: 20px auto;
@@ -103,16 +103,15 @@
         font-size: 1.5rem;
     }
 
-    /* Horizontal scroll instead of stacking */
     .edit-order-container {
-        overflow-x: auto; /* enable scroll */
+        overflow-x: auto; 
     }
 
     .edit-order-container table {
-        min-width: 600px; /* ensure table has width so scroll activates */
+        min-width: 600px; 
     }
 
-    /* Optional: slim scrollbar for modern look */
+    
     .edit-order-container::-webkit-scrollbar {
         height: 6px;
     }

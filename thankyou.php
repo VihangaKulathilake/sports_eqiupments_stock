@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/db.php';
-$pageTitle="Thank You";
+$pageTitle=" Thank You ";
 $cssFile="css/thankyou.css";
 include 'userHeader.php';
 ?>
