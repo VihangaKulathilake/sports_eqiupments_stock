@@ -1,9 +1,10 @@
-//animate slide bar
+//animate sidebar
 document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.querySelector(".sidebar");
     const overlay = document.querySelector(".overlay");
     const menuToggle = document.querySelector(".menuToggle");
     const menuIcon = menuToggle.querySelector(".icon");
+    const cancelBtn = document.querySelector(".sidebarCancelBtn"); // Added cancel button
     const dropdowns = document.querySelectorAll(".sidebar .navlinks li.dropdown");
 
     sidebar.classList.remove("active");
@@ -22,6 +23,13 @@ document.addEventListener("DOMContentLoaded", function() {
         overlay.classList.remove("active");
     });
 
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+    }
+
     dropdowns.forEach(drop => {
         drop.addEventListener("click", function(e) {
             this.classList.toggle("active");
@@ -29,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-//handle back/forward navigation
 window.addEventListener("pageshow", function(event) {
     if (event.persisted) {
         const sidebar = document.querySelector(".sidebar");

@@ -48,7 +48,7 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
           <img src="imgs/png-transparent-hamburger-menu-more-navigation-basic-ui-jumpicon-glyph-icon-removebg-preview.png" alt="Menu Icon" class="icon">
         </div>
         <img src="imgs/E11.png" alt="headerLogo" class="headerLogo">
-      
+        
       <?php
         if(isset($_SESSION['customer_id'])) {
 
@@ -96,6 +96,7 @@ if (isset($_SESSION["image_path"]) && !empty($_SESSION["image_path"])) {
 
     <nav class="sidebar" aria-label="Main Navigation">
       <img src="imgs/E2-removebg-preview-2.png" alt="sidebarLogo" class="sidebarLogo">
+      <img src="imgs/cancel-button.png" alt="Close Sidebar" class="sidebarCancelBtn">
       <ul class="navlinks">
         <li><a href="index.php">Home</a></li>
         <li><a href="displayProducts.php">Products</a></li>

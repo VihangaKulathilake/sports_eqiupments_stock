@@ -40,6 +40,7 @@
     
     <div class="editFormCard">
         <form action="includes/editProfile.inc.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="from" value="user">
             
             <input type="hidden" name="customer_id" value="<?php echo htmlspecialchars($userData['customer_id']); ?>">
 

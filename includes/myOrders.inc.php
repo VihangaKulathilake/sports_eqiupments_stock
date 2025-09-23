@@ -1,10 +1,6 @@
 <?php
-    
-
-    // Include the database connection
     require_once 'db.php';
 
-    // Check if the user is logged in
     if (!isset($_SESSION["username"])) {
         header("Location: ../login.php");
         exit();
@@ -13,8 +9,6 @@
     $username = $_SESSION["username"];
     $userOrders = [];
 
-    // SQL query to get all order items for the logged-in user
-    // We join multiple tables to get product details for each item
     $sql = "SELECT
                 o.order_id,
                 o.order_date,

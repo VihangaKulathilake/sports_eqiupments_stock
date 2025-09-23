@@ -48,13 +48,13 @@ if (isset($_SESSION["profileImg"]) && !empty($_SESSION["profileImg"])) {
           <img src="imgs/png-transparent-hamburger-menu-more-navigation-basic-ui-jumpicon-glyph-icon-removebg-preview.png" alt="Menu Icon" class="icon">
         </div>
         <img src="imgs/E11.png" alt="headerLogo" class="headerLogo">
-        <a href="myProfile.php" class="profileImgLink">
+        <a href="myProfileAdmin.php" class="profileImgLink">
           <img src="<?php echo $profileImg; ?>" alt="profilePhoto" class="profilePhoto">
         </a>
       </div>
 
       <div class="searchbarcontainer">
-        <form class="searchbarhome" action="searchResults.php" method="get">
+        <form class="searchbarhome" action="searchResultsAdmin.php" method="get">
           <input type="search" class="searchbar" name="query" placeholder="Search products, users,..." style="font-size:18px; padding-left:10px">
           <button type="submit" class="searchbtn">Search</button>
         </form>
@@ -63,6 +63,7 @@ if (isset($_SESSION["profileImg"]) && !empty($_SESSION["profileImg"])) {
 
     <nav class="sidebar" aria-label="Main Navigation">
       <img src="imgs/E2-removebg-preview-2.png" alt="sidebarLogo" class="sidebarLogo">
+      <img src="imgs/cancel-button.png" alt="Close Sidebar" class="sidebarCancelBtn">
       <ul class="navlinks">
         <li><a href="adminDashboard.php">Dashboard</a></li>
         <li><a href="products.php">Products</a></li>
