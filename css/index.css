@@ -334,6 +334,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .product-link {
@@ -348,7 +349,7 @@
 .product-block-details h2 {
     margin-bottom: 8px;
     font-size: 20px;
-    line-height: 8px;
+    line-height: 20px;
 }
 
 .product-block-details-left {

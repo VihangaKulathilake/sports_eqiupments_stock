@@ -15,6 +15,7 @@ if(isset($_POST["submit"])){
     $inputsEmptyProduct=inputsEmptyProduct($pName,$pDes,$pCat,$pPrice,$pSup);
 
     if($inputsEmptyProduct!==false){
+        $_SESSION['error_msg'] = "All fields are required.";
         header("Location:../insertProduct.php?error=Inputs empty");
         exit();
     }
@@ -29,7 +30,7 @@ if(isset($_POST["submit"])){
         
 
         $fileExt=strtolower(pathinfo($fileName,PATHINFO_EXTENSION));
-        $allowed=["jpg","jpeg","png","gif"];
+        $allowed=["jpg","jpeg","png","gif","avif","webp"];
 
         if (in_array($fileExt,$allowed)) {
             if ($fileError===0) {
@@ -45,15 +46,18 @@ if(isset($_POST["submit"])){
                 move_uploaded_file($fileTmpName,$fileDestination);
                 
             }else {
+                $_SESSION['error_msg'] = "Files too large.";
                 header("Location:../insertProduct.php?error=File too large");
                 exit();
             }
 
             }else {
+                $_SESSION['error_msg'] = "Upload error.";
                 header("location: ../insertProduct.php?error=upload error");
                 exit();
             }
         }else {
+            $_SESSION['error_msg'] = "Invali file type.";
             header("Location:../insertProduct.php?error=Invalid file type");
             exit();
         }

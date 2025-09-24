@@ -151,6 +151,7 @@ function registerProduct($connect,$pName,$pDes,$pImg,$pCat,$pPrice,$pSup){
         if(!mysqli_stmt_execute($stmt)){
             die("Error inserting product: ".mysqli_error($connect));
         } else {
+            $_SESSION['success_msg'] = "Product added successfully.";
             header("Location:../adminDashboard.php?insertProduct=success");
             exit();
         }

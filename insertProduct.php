@@ -1,9 +1,24 @@
 <?php
 $pageTitle = "Register Product";
 $cssFile = "css/insertProduct.css";
+$extraCss="css/toast.css";
 include 'includes/db.php';
 include 'adminHeader.php';
 ?>
+
+<?php if(isset($_SESSION['error_msg'])): ?>
+    <div class="toast toast-error">
+        <?= htmlspecialchars($_SESSION['error_msg']); ?>
+        <span class="toast-close">&times;</span>
+    </div>
+<?php unset($_SESSION['error_msg']); endif; ?>
+
+<?php if(isset($_SESSION['success_msg'])): ?>
+    <div class="toast toast-success">
+        <?= htmlspecialchars($_SESSION['success_msg']); ?>
+        <span class="toast-close">&times;</span>
+    </div>
+<?php unset($_SESSION['success_msg']); endif; ?>
 
 <div class="insert-product-container">
         <form class="insert-product-form" action="includes/insertProduct.inc.php" method="post" enctype="multipart/form-data">
@@ -23,3 +38,5 @@ include 'adminHeader.php';
 <?php
 include_once 'footer.php';
 ?>
+
+<script src="js/toast.js"></script>
