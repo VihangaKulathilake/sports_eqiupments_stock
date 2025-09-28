@@ -69,14 +69,14 @@ $grandTotal = 0;
                 <tr>
                     <td><img src="productImgs/<?=htmlspecialchars($product['image_path'])?>" alt="<?=htmlspecialchars($product['name'])?>"></td>
                     <td><?=htmlspecialchars($product['name'])?></td>
-                    <td>$<?=number_format($product['price'],2)?></td>
+                    <td>LKR.<?=number_format($product['price'],2)?></td>
                     <td><?=$qty?></td>
-                    <td>$<?=number_format($total,2)?></td>
+                    <td>LKR.<?=number_format($total,2)?></td>
                 </tr>
                 <?php endforeach; ?>
                 <tr class="grand-total">
                     <td colspan="4">Grand Total</td>
-                    <td>$<?=number_format($grandTotal,2)?></td>
+                    <td>LKR.<?=number_format($grandTotal,2)?></td>
                 </tr>
             </tbody>
         </table>

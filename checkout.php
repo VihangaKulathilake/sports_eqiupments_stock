@@ -169,15 +169,15 @@ foreach($cart as $pId => $qty){
     echo '<tr>';
     echo '<td><img src="productImgs/'.htmlspecialchars($product['image_path']).'" alt="'.htmlspecialchars($product['name']).'"></td>';
     echo '<td>'.htmlspecialchars($product['name']).'</td>';
-    echo '<td>$'.number_format($product['price'],2).'</td>';
+    echo '<td>LKR.'.number_format($product['price'],2).'</td>';
     echo '<td>'.$qty.'</td>';
-    echo '<td>$'.number_format($total,2).'</td>';
+    echo '<td>LKR.'.number_format($total,2).'</td>';
     echo '</tr>';
 }
 
 echo '<tr class="grand-total">';
 echo '<td colspan="4">Grand Total</td>';
-echo '<td>$'.number_format($grandTotal,2).'</td>';
+echo '<td>LKR.'.number_format($grandTotal,2).'</td>';
 echo '</tr>';
 echo '</tbody></table>';
 echo '</div>';
