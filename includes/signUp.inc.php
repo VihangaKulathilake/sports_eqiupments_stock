@@ -23,22 +23,27 @@ if(isset($_POST["submit"])){
     $uidExists = userExists($connect, $uName, $eMail, $phone);
 
     if($inputsEmpty !== false){
+        $_SESSION['error_msg'] = "Inputs empty";
         header("Location:../signUp.php?error=Inputs empty");
         exit();
     }
     if($pwrdMatch !== false){
+        $_SESSION['error_msg'] = "Passwords not match";
         header("Location:../signUp.php?error=Passwords not match");
         exit();
     }
     if($invUid !== false){
+        $_SESSION['error_msg'] = "Invalid Username";
         header("Location:../signUp.php?error=Invalid Username");
         exit();
     }
     if($invMail !== false){
+        $_SESSION['error_msg'] = "Invalid Email";
         header("Location:../signUp.php?error=Invalid Email");
         exit();
     }
     if($uidExists !== false){
+        $_SESSION['error_msg'] = "User exists";
         header("Location:../signUp.php?error=User exists");
         exit();
     }
@@ -68,14 +73,17 @@ if(isset($_POST["submit"])){
 
                     move_uploaded_file($fileTmpName, $fileDestination);
                 } else {
+                    $_SESSION['error_msg'] = "File too large";
                     header("Location:../signUp.php?error=File too large");
                     exit();
                 }
             } else {
+                $_SESSION['error_msg'] = "upload error";
                 header("Location:../signUp.php?error=upload error");
                 exit();
             }
         } else {
+            $_SESSION['error_msg'] = "Invalid file type";
             header("Location:../signUp.php?error=Invalid file type");
             exit();
         }
@@ -84,6 +92,7 @@ if(isset($_POST["submit"])){
     userSignup($connect, $name, $uName, $eMail, $phone, $address, $pwd, $newFileName, $role);
 
 } else {
+    $_SESSION['success_msg'] = "Signup successfull";
     header('Location:../signUp.php');
     exit();
 }

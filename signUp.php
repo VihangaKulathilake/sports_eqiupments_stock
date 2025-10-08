@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/auth.css"> <title>Sign up</title>
 </head>
 <body class="auth-container">
+    
     <form class="auth-form" action="includes/signUp.inc.php" method="post" enctype="multipart/form-data">
         <div class="logo-container">
             <img src="imgs/E11.png" alt="logo">
