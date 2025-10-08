@@ -138,7 +138,7 @@ echo '</section>';
                     JOIN products p ON oi.product_id = p.product_id
                     GROUP BY c.customer_id
                     ORDER BY total_spent DESC
-                    LIMIT 8
+                    LIMIT 5
                     ";
 
             $result = mysqli_query($connect, $sql);
